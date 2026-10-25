@@ -1213,7 +1213,7 @@
           </div>
         </div>
 
-        <form id="psychIntakeForm" action="" method="POST" onsubmit="handleFormSubmit(event)">
+        <form id="psychIntakeForm" action="https://script.google.com/macros/s/AKfycbzi8O1tDe0acaoLAajvFznRbAZ7Dhv5wW13ZKrL-k3jiDoGKIfzo2RZOfEJnY9XD2oO/exec" method="POST" onsubmit="handleFormSubmit(event)">
           
           <!-- SERVICE SELECTION -->
           <div class="form-group-section">
@@ -1818,47 +1818,31 @@
     });
 
     // Form submission handler
-    function handleFormSubmit(e) {
+   function handleFormSubmit(e) {
       e.preventDefault();
       const form = document.getElementById('psychIntakeForm');
       const successCard = document.getElementById('successCard');
       const submitBtn = document.getElementById('submitBtn');
 
-      const formData = new FormData(form);
-      const symptoms = [];
-      form.querySelectorAll('input[name="symptoms"]:checked').forEach(c => symptoms.push(c.value));
-
-      latestSubmittedIntake = {
-        fullName: formData.get('fullName') || '',
-        preferredName: formData.get('preferredName') || '',
-        age: formData.get('age') || '',
-        pronouns: formData.get('pronouns') || '',
-        genderIdentity: formData.get('genderIdentity') || '',
-        email: formData.get('email') || '',
-        phone: formData.get('phone') || '',
-        consultationType: formData.get('consultationType') || 'individual',
-        emergencyName: formData.get('emergencyName') || '',
-        emergencyRelationship: formData.get('emergencyRelationship') || '',
-        emergencyPhone: formData.get('emergencyPhone') || '',
-        currentOccupationOrLifeContext: formData.get('currentOccupationOrLifeContext') || '',
-        stressLevel: formData.get('stressLevel') || '5',
-        primaryReason: formData.get('primaryReason') || '',
-        symptoms: symptoms,
-        previousTherapy: formData.get('previousTherapy') || '',
-        preferredSessionMode: formData.get('preferredSessionMode') || 'virtual_seriousmd',
-        aiTranscriberConsent: formData.get('aiTranscriberConsent') || 'agree',
-        referenceId: 'VBT-' + Math.floor(100000 + Math.random() * 900000),
-        submissionDate: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
-      };
-
       submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting to SeriousMD...';
+      submitBtn.textContent = 'Submitting securely...';
 
-      setTimeout(() => {
+      const formData = new FormData(form);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
         form.style.display = 'none';
         successCard.style.display = 'block';
         successCard.scrollIntoView({ behavior: 'smooth' });
-      }, 700);
+      })
+      .catch(error => {
+        alert('There was a temporary error submitting. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit SeriousMD Intake Safely →';
+      });
     }
 
     function resetForm() {
