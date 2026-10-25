@@ -131,13 +131,12 @@
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 0.85rem;
-      min-width: 0;
-      flex-shrink: 1;
+      gap: 0.9rem;
+      flex-shrink: 0;
     }
     .brand-logo-img {
-      height: 3.25rem;
-      max-height: 52px;
+      height: 3.65rem;
+      max-height: 58px;
       width: auto;
       object-fit: contain;
       display: block;
@@ -147,19 +146,20 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-width: 0;
+      border-left: 1px solid var(--border-subtle);
+      padding-left: 0.85rem;
+      line-height: 1.25;
     }
     .brand-name {
       line-height: 1.25;
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       color: var(--brand-navy-dark);
+      font-size: 1.05rem;
     }
     .brand-title span.rpsy {
       color: #0284C7;
       font-family: var(--font-body);
-      font-size: 0.925rem;
+      font-size: 0.875rem;
       font-weight: 600;
     }
     .brand-credential {
@@ -173,7 +173,7 @@
     }
     .nav-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.2rem;
       list-style: none;
     }
     .nav-links a {
@@ -835,18 +835,12 @@
       .brand-title {
         gap: 0.55rem;
       }
+      .brand-text-block {
+        display: none;
+      }
       .brand-logo-img {
-        height: 2.35rem;
-        max-height: 38px;
-      }
-      .brand-name {
-        font-size: 0.9rem;
-      }
-      .brand-title span.rpsy {
-        font-size: 0.8rem;
-      }
-      .brand-credential {
-        font-size: 0.58rem;
+        height: 3rem;
+        max-height: 48px;
       }
       .header-action-btn {
         padding: 0.45rem 0.85rem !important;
@@ -883,11 +877,9 @@
         <a href="#" class="brand-title">
           <!-- Logo with primary Google Drive CDN, fallback to Drive export, and local relative fallback -->
           <img
-            src="https://lh3.googleusercontent.com/d/1je2WcKeu0gu__AFvc6W4ZDzUqXjdPqzw"
+            src="data:image/png;base64,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"
             alt="Vincent Bren Tajor, Registered Psychologist Logo"
             class="brand-logo-img"
-            referrerpolicy="no-referrer"
-            onerror="if (!this.dataset.retried) { this.dataset.retried = '1'; this.src='https://drive.google.com/uc?export=view&id=1je2WcKeu0gu__AFvc6W4ZDzUqXjdPqzw'; } else if (this.dataset.retried === '1') { this.dataset.retried = '2'; this.src='./assets/aistudio/main_1146916a.png'; }"
           >
           <div class="brand-text-block">
             <div class="brand-name">Vincent Bren Tajor, <span class="rpsy">RPsy</span></div>
@@ -914,7 +906,7 @@
     <div class="container">
       <div class="hero-grid">
         <div>
-          <div class="kicker">PRC Registered Psychologist #0002156 · SeriousMD Practice</div>
+          <div class="kicker">PRC Registered Psychologist #0002156 · Video & In-Person Practice</div>
           <h1 class="hero-title">Welcome to a Safe Space for Your Healing Journey</h1>
           <p class="hero-bio">
             Kumusta? I am <strong>Vincent Bren Tajor</strong>, a Registered Psychologist. I provide compassionate, evidence-based psychotherapy and counseling for individuals and couples navigating life transitions, emotional distress, relationship strain, sexual wellness, and personal healing.
@@ -940,7 +932,7 @@
           </div>
 
           <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-            <a href="#intake" class="btn-primary">Fill Out SeriousMD Intake Form</a>
+            <a href="#intake" class="btn-primary">Fill Out Intake Form</a>
             <a href="#services" class="btn-secondary">View Session Details</a>
           </div>
         </div>
@@ -1245,11 +1237,11 @@
 
         <div class="faq-item" id="faq2">
           <button class="faq-trigger" onclick="toggleFaq('faq2')">
-            <span>How do virtual sessions work via SeriousMD?</span>
+            <span>How do virtual consultations work?</span>
             <div class="faq-icon">+</div>
           </button>
           <div class="faq-body">
-            You will receive a private, encrypted SeriousMD telehealth link via email and SMS prior to your appointment. You can join from your smartphone, tablet, or laptop in a quiet, confidential location.
+            You will receive a link for the video conferencing via email and SMS prior to your appointment. You can join from your smartphone, tablet, or laptop in a quiet, confidential location.
           </div>
         </div>
 
@@ -1291,7 +1283,7 @@
     <div class="container">
       <div class="section-header">
         <div class="kicker">Confidential First-Step</div>
-        <h2 class="section-title">SeriousMD Psychological Intake Form</h2>
+        <h2 class="section-title">Confidential Psychological Intake Form</h2>
         <p class="section-desc">
           Please take your time filling out this confidential assessment. Vince personally reviews your details prior to your first session.
         </p>
@@ -1303,7 +1295,7 @@
           <div style="font-size: 3rem; margin-bottom: 1rem;">🌿</div>
           <h3 style="font-family: var(--font-display); font-size: 1.8rem; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">Maraming Salamat</h3>
           <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 1.5rem; font-size: 0.95rem;">
-            Your intake details have been securely recorded. Vince Tajor, RPsy will review your background before your scheduled SeriousMD video session.
+            Your intake details have been securely recorded. Vince Tajor, RPsy will review your background before your scheduled video consultation session.
           </p>
           <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
             <button class="btn-primary" type="button" onclick="downloadSubmittedReceipt()">Download Intake Summary (PDF) ↓</button>
@@ -1319,7 +1311,7 @@
             <h3 class="form-sec-title">Consultation Service & Duration</h3>
             <p class="form-sec-sub">Select your intended clinical consultation service.</p>
 
-            <div class="form-grid-3">
+            <div class="form-grid-2">
               <label class="ai-consent-option">
                 <input type="radio" name="consultationType" value="individual" checked>
                 <div>
@@ -1333,14 +1325,6 @@
                 <div>
                   <strong>Marriage & Couples</strong>
                   <div style="font-size: 0.75rem; color: var(--text-light);">80–90 Minutes</div>
-                </div>
-              </label>
-
-              <label class="ai-consent-option">
-                <input type="radio" name="consultationType" value="sexual_wellness">
-                <div>
-                  <strong>Sexual Wellness</strong>
-                  <div style="font-size: 0.75rem; color: var(--text-light);">50–55 Minutes</div>
                 </div>
               </label>
             </div>
@@ -1397,7 +1381,7 @@
               <div class="input-field">
                 <label for="email">Safe Email Address <span class="req">*</span></label>
                 <input type="email" id="email" name="email" placeholder="your.email@gmail.com" required>
-                <small>SeriousMD session invitations will be sent here.</small>
+                <small>A link for video conferencing will be sent here prior to your session.</small>
               </div>
 
               <div class="input-field">
@@ -1505,7 +1489,7 @@
                 <label class="ai-consent-option">
                   <input type="radio" name="preferredSessionMode" value="virtual_seriousmd" checked>
                   <div>
-                    <strong>Virtual (SeriousMD)</strong>
+                    <strong>Virtual (Online)</strong>
                     <div style="font-size: 0.7rem; color: #0284C7;">Primary Telehealth</div>
                   </div>
                 </label>
@@ -1561,7 +1545,7 @@
 
           <div style="margin-top: 2rem;">
             <button type="submit" class="btn-submit" id="submitBtn">
-              Submit SeriousMD Intake Safely →
+              Submit Intake Safely →
             </button>
             <p style="text-align: center; font-size: 0.75rem; color: var(--text-light); margin-top: 0.5rem;">
               🔒 256-Bit Encrypted. Reviewed personally by Vincent Bren Tajor, RPsy (PRC #0002156).
@@ -1713,14 +1697,17 @@
         <div class="footer-col">
           <h4>Vincent Bren Tajor, RPsy</h4>
           <p>
-            Registered Psychologist (PRC #0002156). Individual Psychotherapy, Sexual Wellness, and Marriage/Couples Counseling.
+            Registered Psychologist (PRC #0002156). Individual Psychotherapy and Marriage/Couples Counseling.
           </p>
           <p>Email: <a href="mailto:vtajor.psych@gmail.com" style="color: #38BDF8;">vtajor.psych@gmail.com</a></p>
+          <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+            Facebook: <a href="https://www.facebook.com/profile.php?id=61580179499024" target="_blank" rel="noopener noreferrer" style="color: #94A3B8; text-decoration: underline; text-underline-offset: 2px;">Filipino Worker's Psychologist</a>
+          </p>
         </div>
 
         <div class="footer-col">
           <h4>Practice & Clinic Hours</h4>
-          <p>Primary: SeriousMD Telehealth (Virtual)</p>
+          <p>Primary: Video Telehealth Consultation (Virtual)</p>
           <p>Mapagkalinga Services, Taytay, Rizal (Saturdays)</p>
           <p>Aurahealth Rehab East, Robinsons Metroeast (Fridays)</p>
         </div>
@@ -1988,7 +1975,7 @@
       form.querySelectorAll('.symptom-item').forEach(el => el.classList.remove('checked'));
       updateStressDisplay(5);
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit SeriousMD Intake Safely →';
+      submitBtn.textContent = 'Submit Intake Safely →';
       successCard.style.display = 'none';
       form.style.display = 'block';
     }
@@ -2052,130 +2039,173 @@
             format: 'a4'
           });
 
-          const pageWidth = doc.internal.pageSize.getWidth();
-          const margin = 20;
-          const contentWidth = pageWidth - margin * 2;
+          const pageWidth = doc.internal.pageSize.getWidth(); // 210mm
+          const margin = 18; // 18mm margin
+          const contentWidth = pageWidth - margin * 2; // 174mm
+          const boxPaddingX = 8;
+          const textWrapWidth = contentWidth - boxPaddingX * 2; // 158mm
           let y = 22;
 
-          // Header Bar (#CBE4F9 pale sky blue)
+          // Header Bar (Brand Pale Sky Blue #CBE4F9)
           doc.setFillColor(203, 228, 249);
-          doc.rect(0, 0, pageWidth, 16, 'F');
+          doc.rect(0, 0, pageWidth, 15, 'F');
 
           // Header text: Retain ONLY clinician credential centered cleanly
           doc.setFont('helvetica', 'bold');
           doc.setFontSize(8.5);
           doc.setTextColor(14, 41, 84);
-          doc.text('VINCENT BREN TAJOR, RPsy · REGISTERED PSYCHOLOGIST · PRC #0002156', pageWidth / 2, 10.5, { align: 'center' });
+          doc.text('VINCENT BREN TAJOR, RPsy · REGISTERED PSYCHOLOGIST · PRC #0002156', pageWidth / 2, 9.8, { align: 'center' });
 
           // Title
-          y = 28;
-          doc.setFont('times', 'bold');
-          doc.setFontSize(17);
+          y = 27;
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(16);
           doc.setTextColor(14, 41, 84);
           const titleLines = doc.splitTextToSize(item.title, contentWidth);
           doc.text(titleLines, margin, y);
-          y += titleLines.length * 8;
+          y += titleLines.length * 7;
 
           // Subtitle
           doc.setFont('helvetica', 'italic');
-          doc.setFontSize(10.5);
-          doc.setTextColor(70, 90, 110);
+          doc.setFontSize(9.5);
+          doc.setTextColor(71, 85, 105);
           const subLines = doc.splitTextToSize(item.subtitle, contentWidth);
           doc.text(subLines, margin, y);
-          y += subLines.length * 5.5 + 2;
+          y += subLines.length * 5 + 2;
 
           // Metadata ribbon
           doc.setFont('helvetica', 'normal');
-          doc.setFontSize(8.5);
-          doc.setTextColor(100, 115, 130);
+          doc.setFontSize(8);
+          doc.setTextColor(100, 116, 139);
           doc.text(`Category: ${item.category}   |   Source: ${item.source}   |   ${item.readTime}`, margin, y);
           y += 5;
 
           // APA Citation Box
-          doc.setFillColor(240, 245, 252);
-          doc.setDrawColor(215, 230, 245);
-          const citationLines = doc.splitTextToSize(`APA Reference: ${item.apaCitation}`, contentWidth - 6);
-          const citationHeight = citationLines.length * 4 + 5;
-          doc.roundedRect(margin, y, contentWidth, citationHeight, 2, 2, 'FD');
-
-          doc.setFont('times', 'normal');
+          doc.setFont('helvetica', 'normal');
           doc.setFontSize(7.5);
-          doc.setTextColor(60, 75, 95);
-          doc.text(citationLines, margin + 3, y + 4);
+          doc.setTextColor(71, 85, 105);
+          const citationLines = doc.splitTextToSize(`APA Reference: ${item.apaCitation}`, textWrapWidth);
+          const citationHeight = citationLines.length * 3.8 + 8;
+          
+          doc.setFillColor(248, 250, 252);
+          doc.setDrawColor(226, 232, 240);
+          doc.setLineWidth(0.3);
+          doc.roundedRect(margin, y, contentWidth, citationHeight, 2, 2, 'FD');
+          doc.text(citationLines, margin + boxPaddingX, y + 5);
           y += citationHeight + 5;
 
           // Divider
-          doc.setDrawColor(210, 225, 240);
-          doc.setLineWidth(0.5);
+          doc.setDrawColor(226, 232, 240);
+          doc.setLineWidth(0.4);
           doc.line(margin, y, pageWidth - margin, y);
-          y += 7;
+          y += 6;
 
-          // Introduction Box
-          doc.setFillColor(245, 250, 255);
-          doc.setDrawColor(200, 220, 245);
-          const introLines = doc.splitTextToSize(item.intro, contentWidth - 8);
-          const introBoxHeight = introLines.length * 4.8 + 8;
-          doc.roundedRect(margin, y, contentWidth, introBoxHeight, 3, 3, 'FD');
+          // Introduction Box (Generous padding + left accent bar)
+          doc.setFont('helvetica', 'italic');
+          doc.setFontSize(8.5);
+          doc.setTextColor(30, 41, 59);
+          const introLines = doc.splitTextToSize(item.intro, textWrapWidth);
+          const introBoxHeight = introLines.length * 4.3 + 11;
 
-          doc.setFont('times', 'italic');
-          doc.setFontSize(9.5);
-          doc.setTextColor(40, 50, 60);
-          doc.text(introLines, margin + 4, y + 6);
-          y += introBoxHeight + 7;
+          doc.setFillColor(248, 250, 252);
+          doc.setDrawColor(203, 228, 249);
+          doc.setLineWidth(0.4);
+          doc.roundedRect(margin, y, contentWidth, introBoxHeight, 2.5, 2.5, 'FD');
+
+          // Left accent bar
+          doc.setFillColor(14, 41, 84);
+          doc.roundedRect(margin, y, 2.5, introBoxHeight, 1, 1, 'F');
+
+          doc.text(introLines, margin + boxPaddingX, y + 6.5);
+          y += introBoxHeight + 6;
 
           // Guide Sections
           item.sections.forEach(sec => {
             if (y > 240) {
               doc.addPage();
-              y = 25;
+              doc.setFillColor(203, 228, 249);
+              doc.rect(0, 0, pageWidth, 14, 'F');
+              doc.setFont('helvetica', 'bold');
+              doc.setFontSize(8);
+              doc.setTextColor(14, 41, 84);
+              doc.text('VINCENT BREN TAJOR, RPsy · REGISTERED PSYCHOLOGIST · PRC #0002156', pageWidth / 2, 9, { align: 'center' });
+              y = 24;
             }
 
             doc.setFont('helvetica', 'bold');
-            doc.setFontSize(10.5);
+            doc.setFontSize(10);
             doc.setTextColor(14, 41, 84);
             doc.text(sec.heading, margin, y);
-            y += 5.5;
+            y += 5.2;
 
             doc.setFont('helvetica', 'normal');
-            doc.setFontSize(9);
-            doc.setTextColor(45, 55, 65);
+            doc.setFontSize(8.5);
+            doc.setTextColor(51, 65, 85);
 
             sec.content.forEach(c => {
-              const bulletLines = doc.splitTextToSize(`•  ${c}`, contentWidth - 4);
-              if (y + bulletLines.length * 4.5 > 270) {
+              const bulletLines = doc.splitTextToSize(`•   ${c}`, contentWidth - 4);
+              if (y + bulletLines.length * 4.4 > 272) {
                 doc.addPage();
-                y = 25;
+                doc.setFillColor(203, 228, 249);
+                doc.rect(0, 0, pageWidth, 14, 'F');
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(8);
+                doc.setTextColor(14, 41, 84);
+                doc.text('VINCENT BREN TAJOR, RPsy · REGISTERED PSYCHOLOGIST · PRC #0002156', pageWidth / 2, 9, { align: 'center' });
+                y = 24;
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8.5);
+                doc.setTextColor(51, 65, 85);
               }
               doc.text(bulletLines, margin + 2, y);
-              y += bulletLines.length * 4.6 + 1.5;
+              y += bulletLines.length * 4.4 + 1.6;
             });
-            y += 3.5;
+            y += 2.5;
           });
 
           // Action Prompt Box
           if (y > 235) {
             doc.addPage();
-            y = 25;
+            doc.setFillColor(203, 228, 249);
+            doc.rect(0, 0, pageWidth, 14, 'F');
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            doc.setTextColor(14, 41, 84);
+            doc.text('VINCENT BREN TAJOR, RPsy · REGISTERED PSYCHOLOGIST · PRC #0002156', pageWidth / 2, 9, { align: 'center' });
+            y = 24;
           }
-          doc.setFillColor(235, 245, 255);
-          doc.setDrawColor(180, 210, 245);
-          const actionLines = doc.splitTextToSize(`Clinical Reflection: ${item.actionPrompt}`, contentWidth - 8);
-          const actionBoxHeight = actionLines.length * 5 + 8;
-          doc.roundedRect(margin, y, contentWidth, actionBoxHeight, 3, 3, 'FD');
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8.5);
+          const promptLines = doc.splitTextToSize(item.actionPrompt, textWrapWidth);
+          const actionBoxHeight = promptLines.length * 4.4 + 15;
+
+          doc.setFillColor(239, 246, 252);
+          doc.setDrawColor(186, 224, 253);
+          doc.setLineWidth(0.4);
+          doc.roundedRect(margin, y, contentWidth, actionBoxHeight, 2.5, 2.5, 'FD');
+
+          // Left accent bar
+          doc.setFillColor(2, 132, 199);
+          doc.roundedRect(margin, y, 2.5, actionBoxHeight, 1, 1, 'F');
 
           doc.setFont('helvetica', 'bold');
-          doc.setFontSize(9);
           doc.setTextColor(14, 41, 84);
-          doc.text(actionLines, margin + 4, y + 6);
+          doc.text('Clinical Reflection Exercise:', margin + boxPaddingX, y + 6);
+
+          doc.setFont('helvetica', 'normal');
+          doc.setTextColor(30, 41, 59);
+          doc.text(promptLines, margin + boxPaddingX, y + 11.5);
+          y += actionBoxHeight + 6;
 
           // Disclaimer Footer
           doc.setFont('helvetica', 'normal');
           doc.setFontSize(7.5);
-          doc.setTextColor(120, 130, 140);
+          doc.setTextColor(148, 163, 184);
           doc.text(
             'This worksheet is provided for psychological psychoeducation. It does not replace professional clinical care.',
             pageWidth / 2,
-            285,
+            287,
             { align: 'center' }
           );
 
@@ -2359,35 +2389,35 @@
       // 1. Primary: jsPDF generation
       if (window.jspdf && window.jspdf.jsPDF) {
         try {
-          const { jsPDF } = window.jspdf;
           const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
           const pageWidth = doc.internal.pageSize.getWidth();
-          const margin = 20;
+          const margin = 18;
           const contentWidth = pageWidth - margin * 2;
+          const boxPaddingX = 8;
           let y = 20;
 
           // Top Header Banner
           doc.setFillColor(203, 228, 249);
-          doc.rect(0, 0, pageWidth, 16, 'F');
+          doc.rect(0, 0, pageWidth, 15, 'F');
 
           // Header text: Retain ONLY clinician credential centered cleanly
           doc.setFont('helvetica', 'bold');
           doc.setFontSize(8.5);
           doc.setTextColor(14, 41, 84);
-          doc.text('VINCENT BREN TAJOR, RPsy · REGISTERED PSYCHOLOGIST · PRC #0002156', pageWidth / 2, 10.5, { align: 'center' });
+          doc.text('VINCENT BREN TAJOR, RPsy · REGISTERED PSYCHOLOGIST · PRC #0002156', pageWidth / 2, 9.8, { align: 'center' });
 
           y = 28;
-          doc.setFont('times', 'bold');
-          doc.setFontSize(16);
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(15);
           doc.setTextColor(14, 41, 84);
           doc.text('Client Confidential Intake Summary', margin, y);
-          y += 7;
+          y += 6;
 
           doc.setFont('helvetica', 'normal');
-          doc.setFontSize(9);
-          doc.setTextColor(70, 85, 100);
+          doc.setFontSize(8.5);
+          doc.setTextColor(71, 85, 105);
           doc.text(`Reference ID: ${data.referenceId}   |   Submission Date: ${data.submissionDate}`, margin, y);
-          y += 10;
+          y += 9;
 
           const rows = [
             ['Client Full Name', data.fullName],
@@ -2396,66 +2426,72 @@
             ['Gender Identity', data.genderIdentity || 'Not specified'],
             ['Contact Email', data.email],
             ['Mobile Phone', data.phone],
-            ['Consultation Type', data.consultationType === 'marriage_couples' ? 'Marriage & Couples (80–90 min)' : data.consultationType === 'sexual_wellness' ? 'Sexual Wellness (50–55 min)' : 'Individual Psychotherapy (50–55 min)'],
+            ['Consultation Type', data.consultationType === 'marriage_couples' ? 'Marriage & Couples (80–90 min)' : 'Individual Psychotherapy (50–55 min)'],
             ['Life / Work Context', data.currentOccupationOrLifeContext],
             ['Reported Strain Level', `${data.stressLevel} / 10`],
             ['Emergency Contact', `${data.emergencyName} (${data.emergencyRelationship}) - ${data.emergencyPhone}`],
-            ['Location Preference', data.preferredSessionMode === 'virtual_seriousmd' ? 'Virtual (SeriousMD Telehealth)' : data.preferredSessionMode === 'in_person_mapagkalinga' ? 'In-Person (Mapagkalinga Taytay)' : 'In-Person (Aurahealth Metroeast)'],
+            ['Location Preference', data.preferredSessionMode === 'virtual_seriousmd' ? 'Virtual Consultation (Video Telehealth)' : data.preferredSessionMode === 'in_person_mapagkalinga' ? 'In-Person (Mapagkalinga Taytay)' : 'In-Person (Aurahealth Metroeast)'],
             ['AI Note Scribe (Heidi)', data.aiTranscriberConsent === 'agree' ? 'AGREED to AI clinical note-taking' : 'DECLINED (Manual notes only)']
           ];
 
           rows.forEach(([label, value]) => {
             doc.setFillColor(248, 250, 252);
-            doc.rect(margin, y, 60, 8.5, 'F');
-            doc.rect(margin + 60, y, contentWidth - 60, 8.5, 'S');
+            doc.rect(margin, y, 60, 8, 'F');
+            doc.rect(margin + 60, y, contentWidth - 60, 8, 'S');
 
             doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8.5);
-            doc.setTextColor(50, 65, 80);
-            doc.text(label, margin + 3, y + 5.5);
+            doc.setFontSize(8);
+            doc.setTextColor(51, 65, 85);
+            doc.text(label, margin + 3, y + 5.2);
 
             doc.setFont('helvetica', 'normal');
-            doc.setFontSize(8.5);
-            doc.setTextColor(20, 30, 40);
-            const splitVal = doc.splitTextToSize(String(value), contentWidth - 65);
-            doc.text(splitVal[0] || '', margin + 63, y + 5.5);
-            y += 8.5;
+            doc.setFontSize(8);
+            doc.setTextColor(15, 23, 42);
+            const splitVal = doc.splitTextToSize(String(value), contentWidth - 66);
+            doc.text(splitVal[0] || '', margin + 63, y + 5.2);
+            y += 8;
           });
 
-          y += 6;
+          y += 5;
           doc.setFont('helvetica', 'bold');
-          doc.setFontSize(9.5);
+          doc.setFontSize(9);
           doc.setTextColor(14, 41, 84);
           doc.text('Primary Reason for Seeking Therapy:', margin, y);
-          y += 5;
+          y += 4.5;
 
           doc.setFont('helvetica', 'normal');
-          doc.setFontSize(9);
-          doc.setTextColor(40, 50, 60);
+          doc.setFontSize(8.5);
+          doc.setTextColor(51, 65, 85);
           const reasonLines = doc.splitTextToSize(data.primaryReason || 'Not specified', contentWidth);
           doc.text(reasonLines, margin, y);
-          y += reasonLines.length * 4.5 + 4;
+          y += reasonLines.length * 4.3 + 3.5;
 
           const sympText = `Symptoms: ${data.symptoms.length ? data.symptoms.join(', ') : 'None specified'}`;
           const sympSplit = doc.splitTextToSize(sympText, contentWidth);
           doc.text(sympSplit, margin, y);
-          y += sympSplit.length * 4.5 + 6;
+          y += sympSplit.length * 4.3 + 5;
 
           // Next Steps
-          doc.setFillColor(235, 245, 255);
-          doc.setDrawColor(180, 210, 245);
-          doc.roundedRect(margin, y, contentWidth, 24, 3, 3, 'FD');
+          doc.setFillColor(239, 246, 252);
+          doc.setDrawColor(186, 224, 253);
+          doc.setLineWidth(0.4);
+          const nextStepsHeight = 26;
+          doc.roundedRect(margin, y, contentWidth, nextStepsHeight, 2.5, 2.5, 'FD');
+
+          doc.setFillColor(14, 41, 84);
+          doc.roundedRect(margin, y, 2.5, nextStepsHeight, 1, 1, 'F');
+
           doc.setFont('helvetica', 'bold');
-          doc.setFontSize(9);
+          doc.setFontSize(8.5);
           doc.setTextColor(14, 41, 84);
-          doc.text('Next Steps with Vince Tajor, RPsy:', margin + 4, y + 5.5);
+          doc.text('Next Steps with Vince Tajor, RPsy:', margin + boxPaddingX, y + 5.5);
 
           doc.setFont('helvetica', 'normal');
           doc.setFontSize(8);
-          doc.setTextColor(40, 60, 80);
-          doc.text('1. Vince will review your intake details before your scheduled SeriousMD video session.', margin + 4, y + 11);
-          doc.text('2. Meeting links and session reminders will be sent to your email (vtajor.psych@gmail.com).', margin + 4, y + 16);
-          doc.text('3. If you ever need to reschedule, please notify at least 24 hours in advance via SeriousMD.', margin + 4, y + 21);
+          doc.setTextColor(51, 65, 85);
+          doc.text('1. Vince will personally review your intake responses prior to your scheduled consultation.', margin + boxPaddingX, y + 11);
+          doc.text('2. A link will be sent to your email for the video conferencing prior to your session.', margin + boxPaddingX, y + 16);
+          doc.text('3. If you ever need to reschedule, please notify at least 24 hours in advance.', margin + boxPaddingX, y + 21);
 
           doc.save(`intake-receipt-${data.referenceId}.pdf`);
           return;
