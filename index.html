@@ -4,11 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vincent Bren Tajor, RPsy | Psychotherapy & Counseling Portal</title>
-  <meta name="description" content="Safe, compassionate psychotherapy & counseling by Vincent Bren Tajor, Registered Psychologist (PRC #0002156). Individual, Sexual Wellness, and Marriage/Couples Counseling via SeriousMD.">
+  <meta name="description" content="Compassionate, evidence-based psychotherapy & counseling by Vincent Bren Tajor, Registered Psychologist (PRC #0002156). Individual Psychotherapy, Sexual Wellness, and Marriage/Couples Counseling via SeriousMD Telehealth.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
+  <!-- jsPDF for standalone client-side PDF generation on GitHub Pages and external hosts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <style>
     /* CSS Reset & Design Tokens based on Clinician Branding */
     :root {
@@ -55,7 +58,7 @@
 
     .container {
       width: 100%;
-      max-width: 1120px;
+      max-width: 1140px;
       margin-left: auto;
       margin-right: auto;
       padding-left: 1.5rem;
@@ -74,7 +77,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1120px;
+      max-width: 1140px;
       margin: 0 auto;
     }
     .crisis-links strong {
@@ -96,8 +99,8 @@
     header {
       position: sticky;
       top: 0;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-subtle);
       z-index: 100;
     }
@@ -105,42 +108,35 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 4.25rem;
-      gap: 2rem;
+      height: 4.75rem;
+      gap: 1.5rem;
     }
     .brand-title {
       font-family: var(--font-display);
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 600;
       color: var(--brand-navy-dark);
       text-decoration: none;
-      white-space: nowrap;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.85rem;
     }
-    .brand-badge {
-      background: var(--brand-sky-blue);
-      color: var(--brand-navy-dark);
-      font-family: var(--font-display);
-      font-size: 0.85rem;
-      font-weight: 700;
-      width: 1.8rem;
-      height: 1.8rem;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .brand-logo-img {
+      height: 3.25rem;
+      max-height: 54px;
+      width: auto;
+      object-fit: contain;
+      display: block;
     }
     .brand-title span.rpsy {
       color: #0284C7;
       font-family: var(--font-body);
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 500;
     }
     .nav-links {
       display: flex;
-      gap: 1.75rem;
+      gap: 1.5rem;
       list-style: none;
     }
     .nav-links a {
@@ -160,7 +156,7 @@
       gap: 0.5rem;
       background: var(--brand-navy-dark);
       color: #FFFFFF;
-      padding: 0.7rem 1.4rem;
+      padding: 0.75rem 1.4rem;
       border-radius: var(--radius-sm);
       font-size: 0.875rem;
       font-weight: 600;
@@ -178,7 +174,7 @@
     .btn-secondary {
       background: #FFFFFF;
       color: var(--text-main);
-      padding: 0.7rem 1.4rem;
+      padding: 0.75rem 1.4rem;
       border-radius: var(--radius-sm);
       font-size: 0.875rem;
       font-weight: 500;
@@ -186,6 +182,9 @@
       text-decoration: none;
       cursor: pointer;
       transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
     .btn-secondary:hover {
       background: var(--bg-soft-blue);
@@ -199,7 +198,7 @@
     }
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1.25fr 0.75fr;
       gap: 3.5rem;
       align-items: center;
     }
@@ -263,6 +262,7 @@
       object-position: top;
       background: var(--brand-sky-blue);
       margin-bottom: 1rem;
+      display: block;
     }
     .hero-card-name {
       font-family: var(--font-display);
@@ -289,94 +289,109 @@
       font-size: 0.95rem;
     }
 
-    /* What to Expect */
-    .expect-section {
-      background: #F8FAFC;
+    /* Common Section Styles */
+    .section-wrap {
       padding: 5rem 0;
       border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
     }
     .section-header {
       text-align: center;
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto 3.5rem;
     }
     .section-title {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
       color: var(--brand-navy-dark);
-      line-height: 1.25;
       margin-bottom: 0.75rem;
       font-weight: 500;
     }
     .section-desc {
-      font-size: 0.95rem;
       color: var(--text-muted);
-      line-height: 1.65;
+      font-size: 0.975rem;
+      line-height: 1.6;
     }
 
+    /* Services Grid */
     .service-breakdown-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
     .service-box {
       background: #FFFFFF;
       border: 1px solid var(--border-card);
       border-radius: var(--radius-lg);
       padding: 1.75rem;
+      box-shadow: var(--shadow-soft);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     .service-time-badge {
-      background: var(--brand-sky-blue);
-      color: var(--brand-navy-dark);
+      display: inline-block;
       font-size: 0.75rem;
-      font-weight: 700;
-      font-family: monospace;
+      font-weight: 600;
+      background: var(--bg-soft-blue);
+      color: var(--brand-navy-dark);
       padding: 0.25rem 0.6rem;
-      border-radius: 6px;
+      border-radius: 999px;
+      border: 1px solid var(--brand-sky-blue);
     }
 
     .expect-steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      margin-bottom: 3rem;
+      margin-top: 2rem;
     }
     .step-card {
       background: #FFFFFF;
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 2rem 1.5rem;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-soft);
+    }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--brand-navy-dark);
+      margin-bottom: 0.75rem;
+      line-height: 1;
+    }
+
+    /* Modalities 3x3 Grid */
+    .modality-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .modality-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-soft);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .step-num {
-      width: 2.75rem;
-      height: 2.75rem;
-      background: var(--bg-soft-blue);
-      color: var(--brand-navy-dark);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 1.25rem;
+    .modality-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #0E2954;
+      background: #EFF6FC;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #CBE4F9;
+      display: inline-block;
     }
 
     /* FAQs */
-    .faq-section {
-      padding: 5rem 0;
-      background: #FFFFFF;
-    }
     .faq-accordion {
-      max-width: 780px;
+      max-width: 800px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
@@ -390,7 +405,7 @@
       transition: all 0.2s ease;
     }
     .faq-item.active {
-      border-color: var(--brand-sky-blue);
+      border-color: var(--brand-navy-dark);
       box-shadow: var(--shadow-soft);
     }
     .faq-trigger {
@@ -399,37 +414,30 @@
       padding: 1.25rem 1.5rem;
       background: none;
       border: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
       font-family: var(--font-body);
       font-size: 1rem;
       font-weight: 600;
       color: var(--brand-navy-dark);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
     }
     .faq-icon {
-      width: 1.75rem;
-      height: 1.75rem;
-      border-radius: 50%;
-      background: var(--bg-soft-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      color: var(--brand-navy-dark);
-      transition: transform 0.25s ease;
+      font-size: 1.2rem;
+      color: #0284C7;
+      transition: transform 0.2s ease;
     }
     .faq-item.active .faq-icon {
       transform: rotate(45deg);
     }
     .faq-body {
-      padding: 0 1.5rem 1.5rem;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      line-height: 1.7;
       display: none;
-      border-top: 1px solid rgba(0,0,0,0.04);
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      border-top: 1px solid #F1F5F9;
       padding-top: 1rem;
     }
     .faq-item.active .faq-body {
@@ -437,66 +445,59 @@
     }
 
     /* Intake Form */
-    .intake-section {
-      padding: 5rem 0;
-      background: #FFFFFF;
-    }
     .intake-form-wrapper {
       max-width: 820px;
       margin: 0 auto;
-      background: #F8FAFC;
+      background: #FFFFFF;
       border: 1px solid var(--border-card);
       border-radius: var(--radius-xl);
-      padding: 3rem;
+      padding: 2.5rem;
       box-shadow: var(--shadow-soft);
     }
     .form-group-section {
-      margin-bottom: 2.75rem;
-      padding-bottom: 2.25rem;
       border-bottom: 1px solid var(--border-subtle);
-    }
-    .form-group-section:last-of-type {
-      border-bottom: none;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0;
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
     }
     .form-sec-title {
       font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 600;
+      font-size: 1.2rem;
       color: var(--brand-navy-dark);
       margin-bottom: 0.25rem;
     }
     .form-sec-sub {
       font-size: 0.8rem;
       color: var(--text-light);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
     .form-grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.25rem;
+      margin-bottom: 1rem;
     }
     .form-grid-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
-    }
-    .form-col-full {
-      grid-column: 1 / -1;
+      margin-bottom: 1rem;
     }
     .input-field {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.35rem;
     }
     .input-field label {
-      font-size: 0.8rem;
+      font-size: 0.825rem;
       font-weight: 600;
       color: var(--text-main);
     }
     .input-field label span.req {
-      color: #991B1B;
+      color: #DC2626;
+    }
+    .input-field small {
+      font-size: 0.725rem;
+      color: var(--text-light);
     }
     .input-field input, .input-field select, .input-field textarea {
       width: 100%;
@@ -648,47 +649,104 @@
       transform: translateY(-2px);
     }
     .resource-tag {
+      display: inline-block;
       font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--brand-navy-dark);
-      background: var(--bg-soft-blue);
-      display: inline-block;
-      padding: 0.2rem 0.5rem;
+      color: #0369A1;
+      background: #EFF6FC;
+      border: 1px solid #CBE4F9;
+      padding: 0.2rem 0.6rem;
       border-radius: 4px;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Interactive Worksheet Preview Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(14, 41, 84, 0.6);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      z-index: 1000;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-box {
+      background: #FFFFFF;
+      width: 100%;
+      max-width: 760px;
+      max-height: 85vh;
+      border-radius: var(--radius-xl);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modalFadeIn 0.2s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.97); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .modal-header {
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #F8FAFC;
+    }
+    .modal-body {
+      padding: 1.75rem;
+      overflow-y: auto;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      line-height: 1.65;
+    }
+    .modal-footer {
+      padding: 1rem 1.75rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #FFFFFF;
     }
 
     /* Footer */
     footer {
-      background: #0B1E3B;
-      color: #CBD5E1;
+      background: var(--brand-navy-dark);
+      color: #E2E8F0;
       padding: 4.5rem 0 2.5rem;
-      font-size: 0.825rem;
+      font-size: 0.875rem;
     }
     .footer-grid {
       display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr;
       gap: 3rem;
       margin-bottom: 3.5rem;
     }
     .footer-col h4 {
-      color: #FFFFFF;
       font-family: var(--font-display);
       font-size: 1.15rem;
+      color: #FFFFFF;
       margin-bottom: 1rem;
     }
     .footer-col p {
-      line-height: 1.65;
       color: #94A3B8;
+      line-height: 1.6;
       margin-bottom: 0.75rem;
     }
     .footer-bottom {
-      border-top: 1px solid #1E293B;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       padding-top: 2rem;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       font-size: 0.75rem;
       color: #64748B;
     }
@@ -696,12 +754,13 @@
     @media (max-width: 900px) {
       .hero-grid, .service-breakdown-grid, .expect-steps-grid, .resource-grid, .footer-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
       }
       .nav-links { display: none; }
     }
     @media (max-width: 640px) {
       .intake-form-wrapper { padding: 1.5rem; }
-      .form-grid-2, .form-grid-3, .symptom-grid, .ai-consent-options { grid-template-columns: 1fr; }
+      .form-grid-2, .form-grid-3, .symptom-grid, .ai-consent-options, .hero-pillars { grid-template-columns: 1fr; }
     }
   </style>
 <script src="/_aistudio-iframe.js?v=6634132a"></script></head>
@@ -723,8 +782,15 @@
   <header>
     <div class="container">
       <div class="nav-bar">
-        <a href="#" class="brand-title" style="display: flex; align-items: center; gap: 0.75rem;">
-          <img src="[https://drive.google.com/uc?export=view&id=1je2WcKeu0gu__AFvc6W4ZDzUqXjdPqzw](https://drive.google.com/uc?export=view&id=1je2WcKeu0gu__AFvc6W4ZDzUqXjdPqzw)" alt="Vincent Tajor Clinical Psychologist Logo" style="height: 2.75rem; width: auto; object-fit: contain;">
+        <a href="#" class="brand-title">
+          <!-- Logo with primary Google Drive CDN, fallback to Drive export, and local relative fallback -->
+          <img
+            src="https://lh3.googleusercontent.com/d/1je2WcKeu0gu__AFvc6W4ZDzUqXjdPqzw"
+            alt="Vincent Bren Tajor, Registered Psychologist Logo"
+            class="brand-logo-img"
+            referrerpolicy="no-referrer"
+            onerror="if (!this.dataset.retried) { this.dataset.retried = '1'; this.src='https://drive.google.com/uc?export=view&id=1je2WcKeu0gu__AFvc6W4ZDzUqXjdPqzw'; } else if (this.dataset.retried === '1') { this.dataset.retried = '2'; this.src='./assets/aistudio/main_1146916a.png'; }"
+          >
           <div>
             <div style="line-height: 1.2;">Vincent Bren Tajor, <span class="rpsy">RPsy</span></div>
             <div style="font-size: 0.65rem; color: var(--text-light); font-family: var(--font-body); font-weight: 500; text-transform: uppercase;">PRC Lic. #0002156</div>
@@ -783,7 +849,14 @@
 
         <div>
           <div class="hero-card-frame">
-            <img src="[https://drive.google.com/uc?export=view&id=17ivqd0iea_JIVcxf-ByNP3bolxhxL0V6](https://drive.google.com/uc?export=view&id=17ivqd0iea_JIVcxf-ByNP3bolxhxL0V6)" alt="Vincent Bren Tajor, Registered Psychologist" class="hero-avatar">
+            <!-- Portrait photo with Google Drive CDN, Drive export fallback, and local relative fallback -->
+            <img
+              src="https://lh3.googleusercontent.com/d/17ivqd0iea_JIVcxf-ByNP3bolxhxL0V6"
+              alt="Vincent Bren Tajor, Registered Psychologist - PRC Lic. #0002156"
+              class="hero-avatar"
+              referrerpolicy="no-referrer"
+              onerror="if (!this.dataset.retried) { this.dataset.retried = '1'; this.src='https://drive.google.com/uc?export=view&id=17ivqd0iea_JIVcxf-ByNP3bolxhxL0V6'; } else if (this.dataset.retried === '1') { this.dataset.retried = '2'; this.src='./assets/aistudio/DSC05497_b8866ad4.jpg'; }"
+            >
             <div class="hero-card-name">Vincent Bren Tajor, RPsy</div>
             <div class="hero-card-sub">Registered Psychologist · PRC Lic. #0002156</div>
             <div class="hero-trust-metrics">
@@ -807,7 +880,7 @@
   </section>
 
   <!-- Services & What to Expect Section -->
-  <section id="services" class="expect-section">
+  <section id="services" class="section-wrap" style="background: #F8FAFC;">
     <div class="container">
       <div class="section-header">
         <div class="kicker">Clinical Services & Modalities</div>
@@ -849,7 +922,7 @@
         </div>
       </div>
 
-      <div class="expect-steps-grid">
+      <div id="how-it-works" class="expect-steps-grid">
         <div class="step-card">
           <div>
             <div class="step-num">01</div>
@@ -881,11 +954,11 @@
         </div>
       </div>
 
-      <!-- Partner Clinic Notice & FB links -->
-      <div style="background: #FFFFFF; border: 1px solid var(--border-card); border-radius: var(--radius-lg); padding: 1.5rem; margin-top: 1.5rem;">
+      <!-- Partner Clinic Notice & Official Verified Facebook Links -->
+      <div style="background: #FFFFFF; border: 1px solid var(--border-card); border-radius: var(--radius-lg); padding: 1.5rem; margin-top: 1.75rem;">
         <div style="font-weight: 600; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Virtual SeriousMD Practice & In-Person Partner Clinics</div>
         <p style="font-size: 0.825rem; color: var(--text-muted); margin-bottom: 1rem;">
-          Primary sessions are conducted virtually on SeriousMD. For in-person sessions, please note that bookings are made directly through each clinic's reception/front desk:
+          Primary sessions are conducted virtually on SeriousMD. For in-person sessions, please note that bookings are coordinated directly through each clinic's reception/front desk:
         </p>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
           <div style="background: #F8FAFC; padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); font-size: 0.8rem;">
@@ -900,7 +973,7 @@
             <strong>Aurahealth Rehab East Clinic</strong> (Robinsons Metroeast · Fridays)
             <div style="margin-top: 0.5rem;">
               <a href="https://www.facebook.com/aurahealthrehabeast" target="_blank" rel="noopener noreferrer" style="color: var(--brand-navy-dark); font-weight: 600; text-decoration: underline;">
-                Visit Aurahealth East Facebook Page →
+                Visit Aurahealth Facebook Page →
               </a>
             </div>
           </div>
@@ -909,78 +982,78 @@
     </div>
   </section>
 
-  <!-- Modalities Section (Eclectic & Culturally Grounded) -->
-  <section id="modalities" class="expect-section" style="background: #FFFFFF;">
+  <!-- My Therapeutic Modalities Section -->
+  <section id="modalities" class="section-wrap" style="background: #FFFFFF;">
     <div class="container">
       <div class="section-header">
-        <div class="kicker">Integrative Psychological Framework</div>
-        <h2 class="section-title">My Modalities: An Eclectic Approach</h2>
+        <div class="kicker">Integrative Clinical Modalities</div>
+        <h2 class="section-title">My Eclectic Therapeutic Approach</h2>
         <p class="section-desc">
-          An <strong>"eclectic approach"</strong> means Vince doesn’t force you into a one-size-fits-all formula. Because your story, challenges, and cultural background are unique, sessions thoughtfully blend the most effective evidence-based modalities tailored to what helps you heal.
+          No two people are identical. An <strong>"eclectic modality"</strong> means I do not force you into a rigid, one-size-fits-all box. Instead, I carefully tailor proven clinical modalities to match your unique personality, emotional pace, and cultural context.
         </p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+      <div class="modality-grid">
         <!-- CBT -->
-        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="modality-card">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">CBT</span>
-              <span style="font-size: 0.7rem; color: #64748B;">Evidence-Based</span>
+              <span class="modality-badge">CBT</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Cognitive</span>
             </div>
             <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Cognitive Behavioral Therapy</h3>
-            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Untangling Thoughts, Feelings & Actions</div>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Examining the Link Between Thoughts, Feelings & Actions</div>
             <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
-              When stress hits, our minds produce automatic negative thoughts (jumping to worst cases or assuming failure). In CBT, we put those thoughts on trial against objective reality to replace cognitive distortions with calm, balanced beliefs.
+              When stressed, our minds jump to catastrophic conclusions. CBT teaches you to catch automatic negative assumptions, test if they are facts, and build balanced, realistic perspectives.
             </p>
           </div>
           <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
-            Best for: anxiety spirals, depressive thoughts, panic, catastrophizing.
+            Best for: anxiety, overthinking, panic, sleep troubles.
           </div>
         </div>
 
         <!-- ACT -->
-        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="modality-card">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">ACT</span>
-              <span style="font-size: 0.7rem; color: #64748B;">Evidence-Based</span>
+              <span class="modality-badge">ACT</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Mindfulness</span>
             </div>
             <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Acceptance & Commitment Therapy</h3>
-            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Dropping the Internal Tug-of-War</div>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Embracing Life & Moving Toward What Matters</div>
             <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
-              Suppressing difficult feelings often makes them push back harder. ACT fosters psychological flexibility: making mindful room for tough emotions without letting them control you, while taking committed steps toward what matters most.
+              Instead of fighting or exhausting yourself trying to eliminate difficult feelings, ACT helps you make room for them while committing to actions aligned with your deepest personal values.
             </p>
           </div>
           <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
-            Best for: chronic stress, avoidance, feeling stuck, value realignment.
+            Best for: chronic stress, feeling stuck, grief, existential uncertainty.
           </div>
         </div>
 
         <!-- REBT -->
-        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="modality-card">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">REBT</span>
-              <span style="font-size: 0.7rem; color: #64748B;">Evidence-Based</span>
+              <span class="modality-badge">REBT</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Action-Oriented</span>
             </div>
             <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Rational Emotive Behavior Therapy</h3>
-            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Challenging Rigid Demands & "Musts"</div>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Dismantling Rigid "Musts" and Demands</div>
             <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
-              REBT identifies toxic perfectionism and rigid self-demands ("I must never fail", "Everyone must approve of me"). We transform rigid demands into healthy preferences and unconditional self-acceptance.
+              Created by Albert Ellis, REBT targets irrational demands like "I <em>must</em> never fail" or "People <em>must</em> always approve of me," replacing them with flexible, self-accepting preferences.
             </p>
           </div>
           <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
-            Best for: perfectionism, imposter syndrome, fear of judgment.
+            Best for: perfectionism, imposter syndrome, anger, frustration tolerance.
           </div>
         </div>
 
         <!-- SFBT -->
-        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="modality-card">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">SFBT</span>
-              <span style="font-size: 0.7rem; color: #64748B;">Evidence-Based</span>
+              <span class="modality-badge">SFBT</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Strengths-Based</span>
             </div>
             <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Solution-Focused Brief Therapy</h3>
             <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Building on Strengths & Preferred Future</div>
@@ -994,10 +1067,10 @@
         </div>
 
         <!-- Rogerian -->
-        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="modality-card">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">Rogerian</span>
+              <span class="modality-badge">Rogerian</span>
               <span style="font-size: 0.7rem; color: #64748B;">Person-Centered</span>
             </div>
             <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Rogerian / Person-Centered Care</h3>
@@ -1012,10 +1085,10 @@
         </div>
 
         <!-- Gottman -->
-        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="modality-card">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">Gottman</span>
+              <span class="modality-badge">Gottman</span>
               <span style="font-size: 0.7rem; color: #64748B;">Couples Method</span>
             </div>
             <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">The Gottman Method</h3>
@@ -1030,19 +1103,19 @@
         </div>
 
         <!-- Sikolohiyang Pilipino -->
-        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between; grid-column: 1 / -1;">
+        <div class="modality-card" style="grid-column: 1 / -1; background: #EFF6FC; border-color: #CBE4F9;">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">Sikolohiyang Pilipino</span>
-              <span style="font-size: 0.7rem; color: #64748B;">Culturally Grounded</span>
+              <span class="modality-badge" style="background: #0E2954; color: #FFFFFF;">Sikolohiyang Pilipino</span>
+              <span style="font-size: 0.7rem; color: #0E2954; font-weight: 600;">Culturally Grounded</span>
             </div>
-            <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Filipino Psychology & Psychoeducation</h3>
-            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Honoring Kapwa, Utang na Loob & the Filipino Reality</div>
-            <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
-              Western therapy often misunderstands the collective Filipino family. Vince integrates indigenous concepts like <em>kapwa</em> (shared identity) and explores healthy adult boundaries with parents or partners without invalidating filial love, respect, or cultural identity.
+            <h3 style="font-size: 1.15rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Filipino Psychology & Psychoeducation</h3>
+            <div style="font-size: 0.85rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Honoring Kapwa, Utang na Loob & the Filipino Reality</div>
+            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+              Western therapy often misunderstands the collective Filipino family. Vince integrates indigenous concepts like <em>kapwa</em> (shared identity) and explores healthy adult boundaries with parents, extended family, or partners without invalidating filial love, respect, or cultural identity.
             </p>
           </div>
-          <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
+          <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #CBE4F9; padding-top: 0.5rem;">
             Best for: family boundary strain, breadwinner pressure, navigating "tampo", and cultural identity.
           </div>
         </div>
@@ -1050,14 +1123,14 @@
     </div>
   </section>
 
-  <!-- FAQs Section -->
-  <section id="faqs" class="faq-section">
+  <!-- FAQs Section with matching cohesive brand color -->
+  <section id="faqs" class="section-wrap" style="background: #F8FAFC;">
     <div class="container">
       <div class="section-header">
         <div class="kicker">Anxiety-Reducing Clarity</div>
         <h2 class="section-title">Frequently Asked Questions</h2>
         <p class="section-desc">
-          Answers regarding SeriousMD sessions, session duration, and AI transcription (Heidi Health).
+          Everything you need to know regarding SeriousMD sessions, session durations, and AI documentation consent.
         </p>
       </div>
 
@@ -1098,7 +1171,17 @@
             <div class="faq-icon">+</div>
           </button>
           <div class="faq-body">
-            While SeriousMD virtual sessions are the primary channel, in-person consultations are available at partner clinics: Mapagkalinga Psychological Services in Taytay, Rizal (Saturdays) and Aurahealth Rehab East Clinic at Robinsons Metroeast (Fridays).
+            Yes. Vince accepts in-person sessions on Saturdays at Mapagkalinga Psychological Services (Taytay, Rizal) and Fridays at Aurahealth Rehab East Clinic (Robinsons Metroeast). Note: In-person slots must be booked directly with each clinic's reception desk via their Facebook pages.
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq5">
+          <button class="faq-trigger" onclick="toggleFaq('faq5')">
+            <span>Is our consultation strictly confidential?</span>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-body">
+            Yes, strictly. Everything discussed is protected by the Philippine Data Privacy Act of 2012 (RA 10173) and the Code of Ethics of the Psychological Association of the Philippines (PAP). Information is only breached in life-threatening crisis situations where imminent safety is at risk.
           </div>
         </div>
       </div>
@@ -1106,24 +1189,28 @@
   </section>
 
   <!-- Intake Form Section -->
-  <section id="intake" class="intake-section">
+  <section id="intake" class="section-wrap" style="background: #FFFFFF;">
     <div class="container">
       <div class="section-header">
-        <div class="kicker">Confidential Client Assessment</div>
-        <h2 class="section-title">Psychotherapy & Counseling Intake Form</h2>
+        <div class="kicker">Confidential First-Step</div>
+        <h2 class="section-title">SeriousMD Psychological Intake Form</h2>
         <p class="section-desc">
-          Prepared for Vincent Bren Tajor, RPsy (PRC #0002156). Please complete prior to your SeriousMD session.
+          Please take your time filling out this confidential assessment. Vince personally reviews your details prior to your first session.
         </p>
       </div>
 
       <div class="intake-form-wrapper">
+        <!-- Success Confirmation Card -->
         <div id="successCard" style="display: none; text-align: center; background: #FFFFFF; border: 1px solid var(--brand-sky-blue); padding: 3rem; border-radius: var(--radius-xl);">
           <div style="font-size: 3rem; margin-bottom: 1rem;">🌿</div>
           <h3 style="font-family: var(--font-display); font-size: 1.8rem; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">Maraming Salamat</h3>
           <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 1.5rem; font-size: 0.95rem;">
             Your intake details have been securely recorded. Vince Tajor, RPsy will review your background before your scheduled SeriousMD video session.
           </p>
-          <button class="btn-secondary" onclick="resetForm()">Submit Another Intake / Clear</button>
+          <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="downloadSubmittedReceipt()">Download Intake Summary (PDF) ↓</button>
+            <button class="btn-secondary" onclick="resetForm()">Submit Another Intake / Clear</button>
+          </div>
         </div>
 
         <form id="psychIntakeForm" action="" method="POST" onsubmit="handleFormSubmit(event)">
@@ -1160,46 +1247,54 @@
             </div>
           </div>
 
-          <!-- SECTION 1: Basic Information -->
+          <!-- SECTION 1: Personal Demographics -->
           <div class="form-group-section">
-            <h3 class="form-sec-title">Section 1: Basic Information</h3>
-            <p class="form-sec-sub">Your personal identifiers and safe communication channels.</p>
+            <h3 class="form-sec-title">Section 1: Personal Demographics</h3>
+            <p class="form-sec-sub">Your identifying details and safe contact channels.</p>
 
             <div class="form-grid-2">
               <div class="input-field">
-                <label for="fullName">Full Name <span class="req">*</span></label>
-                <input type="text" id="fullName" name="fullName" placeholder="e.g. Maria Santos" required>
+                <label for="fullName">Full Legal Name <span class="req">*</span></label>
+                <input type="text" id="fullName" name="fullName" placeholder="e.g. Maria Corazon Santos" required>
               </div>
 
               <div class="input-field">
                 <label for="preferredName">Preferred Name / Nickname</label>
-                <input type="text" id="preferredName" name="preferredName" placeholder="e.g. Mia">
+                <input type="text" id="preferredName" name="preferredName" placeholder="What should Vince call you?">
               </div>
+            </div>
 
+            <div class="form-grid-3">
               <div class="input-field">
                 <label for="age">Age <span class="req">*</span></label>
-                <input type="number" id="age" name="age" min="16" max="110" placeholder="e.g. 28" required>
+                <input type="number" id="age" name="age" min="18" max="100" placeholder="e.g. 28" required>
               </div>
 
               <div class="input-field">
                 <label for="pronouns">Pronouns <span class="req">*</span></label>
-                <input type="text" id="pronouns" name="pronouns" placeholder="e.g. she/her, he/him, they/them" required>
-              </div>
-
-              <div class="input-field form-col-full">
-                <label for="genderIdentity">Gender Identity <span class="req">*</span></label>
-                <select id="genderIdentity" name="genderIdentity" required>
-                  <option value="">Select gender identity...</option>
-                  <option value="Cisgender Woman">Cisgender Woman</option>
-                  <option value="Cisgender Man">Cisgender Man</option>
-                  <option value="Transgender Woman">Transgender Woman</option>
-                  <option value="Transgender Man">Transgender Man</option>
-                  <option value="Non-binary / Genderqueer">Non-binary / Genderqueer</option>
-                  <option value="Questioning">Questioning / Exploring</option>
-                  <option value="Self-describe">Self-describe</option>
+                <select id="pronouns" name="pronouns" required>
+                  <option value="">Select pronouns...</option>
+                  <option value="she/her">She / Her</option>
+                  <option value="he/him">He / Him</option>
+                  <option value="they/them">They / Them</option>
+                  <option value="other">Prefer to self-describe</option>
                 </select>
               </div>
 
+              <div class="input-field">
+                <label for="gender">Gender Identity <span class="req">*</span></label>
+                <select id="gender" name="genderIdentity" required>
+                  <option value="">Select gender...</option>
+                  <option value="Cisgender Woman">Cisgender Woman</option>
+                  <option value="Cisgender Man">Cisgender Man</option>
+                  <option value="Non-binary / Queer">Non-binary / Queer</option>
+                  <option value="Transgender">Transgender</option>
+                  <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
               <div class="input-field">
                 <label for="email">Safe Email Address <span class="req">*</span></label>
                 <input type="email" id="email" name="email" placeholder="your.email@gmail.com" required>
@@ -1259,7 +1354,7 @@
               </div>
               <input type="range" id="stressSlider" name="stressLevel" min="1" max="10" value="5" class="slider-range" oninput="updateStressDisplay(this.value)">
               <div class="stress-ticks">
-                <span>1 (Mild/Calm)</span>
+                <span>1 (Mild / Calm)</span>
                 <span>5 (Moderate Strain)</span>
                 <span>10 (Severe Overwhelm)</span>
               </div>
@@ -1269,11 +1364,11 @@
           <!-- SECTION 4: Clinical Context & Heidi Health AI Consent -->
           <div class="form-group-section">
             <h3 class="form-sec-title">Section 4: Clinical Context & Consent</h3>
-            <p class="form-sec-sub">Reason for therapy, symptoms, and clinical documentation consent.</p>
+            <p class="form-sec-sub">Reason for therapy, work/emotional symptoms, and documentation consent.</p>
 
             <div class="input-field" style="margin-bottom: 1.25rem;">
               <label for="primaryReason">Primary Reason for Seeking Therapy Today <span class="req">*</span></label>
-              <textarea id="primaryReason" name="primaryReason" rows="3" placeholder="What brings you in? (e.g. anxiety, marital conflict, intimacy concerns, grief, major life transition)..." required></textarea>
+              <textarea id="primaryReason" name="primaryReason" rows="3" placeholder="What brings you in? (e.g. anxiety, marital conflict, intimacy concerns, grief, workplace burnout)..." required></textarea>
             </div>
 
             <div class="input-field" style="margin-bottom: 1.25rem;">
@@ -1378,18 +1473,19 @@
     </div>
   </section>
 
-  <!-- Free Resources Section -->
+  <!-- Free Resources Section with Dedicated Printable Worksheets -->
   <section id="resources" class="resources-section">
     <div class="container">
       <div class="section-header">
         <div class="kicker">TherapyAid & PositivePsychology.com Tools</div>
-        <h2 class="section-title">Free Clinical Worksheets (PDF)</h2>
+        <h2 class="section-title">Free Clinical Worksheets & Exercises</h2>
         <p class="section-desc">
-          Download evidence-based worksheets adapted from recognized clinical psychology repositories.
+          Curated clinical worksheets adapted from recognized evidence-based psychology repositories. Available to preview directly or download as clean, isolated printable PDFs.
         </p>
       </div>
 
       <div class="resource-grid">
+        <!-- Resource 1: CBT -->
         <div class="resource-card">
           <div>
             <div class="resource-tag">Cognitive Behavioral Therapy · 8 Min</div>
@@ -1397,17 +1493,23 @@
               CBT Thought Record Worksheet
             </h3>
             <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem;">
-              Core cognitive restructuring tool for identifying automatic negative thoughts and building balanced alternative beliefs. (Source: TherapyAid).
+              Core cognitive restructuring tool for identifying automatic negative thoughts, evaluating cognitive distortions, and building balanced alternative beliefs.
             </p>
             <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 0.6rem; margin-bottom: 1rem; font-size: 0.725rem; font-family: monospace; color: #334155;">
               <strong>APA Citation:</strong> Greenberger, D., & Padesky, C. A. (2015). <em>Mind over mood: Change how you feel by changing the way you think</em> (2nd ed.). Guilford Press.
             </div>
           </div>
-          <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadDemoPdf('CBT-Thought-Record')">
-            Download PDF ↓
-          </button>
+          <div style="display: flex; gap: 0.5rem; justify-content: flex-end; align-items: center; border-top: 1px solid #F1F5F9; padding-top: 1rem;">
+            <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 0.9rem;" onclick="previewWorksheet('cbt-thought-record')">
+              Preview Guide
+            </button>
+            <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadWorksheet('cbt-thought-record')">
+              Download PDF ↓
+            </button>
+          </div>
         </div>
 
+        <!-- Resource 2: Gottman -->
         <div class="resource-card">
           <div>
             <div class="resource-tag">Marriage & Couples · 10 Min</div>
@@ -1415,17 +1517,23 @@
               Gottman Four Horsemen & Antidotes
             </h3>
             <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem;">
-              De-escalate criticism, defensiveness, contempt, and stonewalling in marriage. (Source: The Gottman Institute / PositivePsychology).
+              Evidence-based relationship scripts to de-escalate criticism, defensiveness, contempt, and stonewalling in marriage and long-term partnerships.
             </p>
             <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 0.6rem; margin-bottom: 1rem; font-size: 0.725rem; font-family: monospace; color: #334155;">
               <strong>APA Citation:</strong> Gottman, J. M., & Silver, N. (2015). <em>The seven principles for making marriage work</em>. Harmony Books.
             </div>
           </div>
-          <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadDemoPdf('Gottman-Relationship-Guide')">
-            Download PDF ↓
-          </button>
+          <div style="display: flex; gap: 0.5rem; justify-content: flex-end; align-items: center; border-top: 1px solid #F1F5F9; padding-top: 1rem;">
+            <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 0.9rem;" onclick="previewWorksheet('gottman-four-horsemen')">
+              Preview Guide
+            </button>
+            <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadWorksheet('gottman-four-horsemen')">
+              Download PDF ↓
+            </button>
+          </div>
         </div>
 
+        <!-- Resource 3: Sensate Focus -->
         <div class="resource-card">
           <div>
             <div class="resource-tag">Sexual Wellness · 7 Min</div>
@@ -1433,17 +1541,23 @@
               Sensate Focus & Intimacy Mindfulness
             </h3>
             <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem;">
-              Overcome sexual performance anxiety and rebuild mindful, non-demanding touch. (Source: PositivePsychology.com).
+              Overcome sexual performance anxiety, reclaim tactile presence, and rebuild mindful, non-demanding touch in intimate relationships.
             </p>
             <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 0.6rem; margin-bottom: 1rem; font-size: 0.725rem; font-family: monospace; color: #334155;">
               <strong>APA Citation:</strong> Weiner, L., & Avery-Clark, C. (2014). Sensate focus: A contemporary approach. <em>Sexual and Relationship Therapy</em>, 29(4), 487–505.
             </div>
           </div>
-          <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadDemoPdf('Sensate-Focus-Intimacy-Guide')">
-            Download PDF ↓
-          </button>
+          <div style="display: flex; gap: 0.5rem; justify-content: flex-end; align-items: center; border-top: 1px solid #F1F5F9; padding-top: 1rem;">
+            <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 0.9rem;" onclick="previewWorksheet('sensate-focus-intimacy')">
+              Preview Guide
+            </button>
+            <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadWorksheet('sensate-focus-intimacy')">
+              Download PDF ↓
+            </button>
+          </div>
         </div>
 
+        <!-- Resource 4: Grounding -->
         <div class="resource-card">
           <div>
             <div class="resource-tag">Emotional Regulation · 5 Min</div>
@@ -1451,19 +1565,47 @@
               5-4-3-2-1 Sensory Grounding Technique
             </h3>
             <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem;">
-              Rapid sensory protocol to soothe panic attacks and sensory overwhelm. (Source: TherapyAid).
+              Rapid somatic grounding protocol paired with physiological sigh breathing to soothe panic attacks, anticipatory anxiety, and sensory overwhelm.
             </p>
             <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 0.6rem; margin-bottom: 1rem; font-size: 0.725rem; font-family: monospace; color: #334155;">
               <strong>APA Citation:</strong> Linehan, M. M. (2015). <em>DBT skills training manual</em> (2nd ed.). Guilford Press.
             </div>
           </div>
-          <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadDemoPdf('54321-Grounding-Technique')">
-            Download PDF ↓
-          </button>
+          <div style="display: flex; gap: 0.5rem; justify-content: flex-end; align-items: center; border-top: 1px solid #F1F5F9; padding-top: 1rem;">
+            <button class="btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 0.9rem;" onclick="previewWorksheet('grounding-54321')">
+              Preview Guide
+            </button>
+            <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadWorksheet('grounding-54321')">
+              Download PDF ↓
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Interactive Worksheet Preview Modal -->
+  <div id="worksheetModal" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <span id="modalCategory" class="resource-tag" style="margin-bottom: 0.25rem;">Category</span>
+          <h3 id="modalTitle" style="font-family: var(--font-display); font-size: 1.25rem; color: var(--brand-navy-dark);">Worksheet Title</h3>
+        </div>
+        <button onclick="closeWorksheetModal()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer; color: #64748B;">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body">
+        <!-- Injected dynamically -->
+      </div>
+      <div class="modal-footer">
+        <span style="font-size: 0.75rem; color: var(--text-light);">PRC Registered Psychologist #0002156</span>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn-secondary" onclick="closeWorksheetModal()" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">Close</button>
+          <button id="modalDownloadBtn" class="btn-primary" style="font-size: 0.8rem; padding: 0.4rem 1rem;">Download PDF ↓</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>
@@ -1472,7 +1614,7 @@
         <div class="footer-col">
           <h4>Vincent Bren Tajor, RPsy</h4>
           <p>
-            Registered Psychologist (PRC #0002156). Individual Psychotherapy, Sexual Wellness, and Marriage Counseling.
+            Registered Psychologist (PRC #0002156). Individual Psychotherapy, Sexual Wellness, and Marriage/Couples Counseling.
           </p>
           <p>Email: <a href="mailto:vtajor.psych@gmail.com" style="color: #38BDF8;">vtajor.psych@gmail.com</a></p>
         </div>
@@ -1498,8 +1640,156 @@
     </div>
   </footer>
 
-  <!-- Embedded Vanilla JS -->
+  <!-- Hidden iframe strictly used for isolated worksheet printing when jsPDF fallback is needed -->
+  <iframe id="printWorksheetIframe" style="position: fixed; right: 100%; bottom: 100%; width: 0; height: 0; border: none;"></iframe>
+
+  <!-- Embedded Vanilla JS with Robust External Hosting & PDF Logic -->
   <script>
+    // Clinical Worksheets Dataset with Full Content and APA Citations
+    const THERAPY_RESOURCES = {
+      'cbt-thought-record': {
+        id: 'cbt-thought-record',
+        title: 'CBT Thought Record & Cognitive Restructuring',
+        subtitle: 'Challenging Negative Automatic Thoughts & Cognitive Distortions',
+        source: 'TherapyAid & PositivePsychology.com',
+        apaCitation: 'Greenberger, D., & Padesky, C. A. (2015). Mind over mood: Change how you feel by changing the way you think (2nd ed.). Guilford Press. Adapted from Beck, A. T. (1979). Cognitive therapy of depression. Guilford Press.',
+        category: 'Cognitive Behavioral Therapy (CBT)',
+        readTime: '8 min clinical guide',
+        intro: 'Our thoughts are not absolute facts; they are mental hypotheses shaped by past experiences and stress. Cognitive restructuring allows you to gently inspect automatic thoughts without judging yourself for having them.',
+        sections: [
+          {
+            heading: '1. Common Cognitive Traps',
+            content: [
+              'All-or-Nothing Thinking: Viewing situations in black-and-white extremes ("If this isn\'t flawless, I have completely failed").',
+              'Catastrophizing: Automatically leaping to the worst-case scenario and assuming you cannot survive it.',
+              'Mind Reading: Assuming people are thinking negatively of you without verifying evidence.',
+              'Emotional Reasoning: Believing that because you feel inadequate, you must genuinely be inadequate.',
+              '"Should" Statements: Demanding that yourself, partners, or reality strictly conform to unbendable expectations.'
+            ]
+          },
+          {
+            heading: '2. The 3-Question Reality Test',
+            content: [
+              'Question 1: What is the concrete, objective evidence supporting this thought? What is the evidence against it?',
+              'Question 2: What would I say to a dear friend who was experiencing this exact dilemma?',
+              'Question 3: If the worst-case did occur, what is one realistic step I could take to handle it?'
+            ]
+          },
+          {
+            heading: '3. Clinical Action: Crafting a Balanced Alternative',
+            content: [
+              'Original automatic thought: "I am completely falling apart and cannot handle my commitments."',
+              'Restructured belief: "I am feeling overwhelmed right now, which is a sign to slow down and prioritize—not proof that I am incapable."'
+            ]
+          }
+        ],
+        actionPrompt: 'Pick one recurring worry from the past 48 hours. Write down the automatic thought, test the evidence, and draft one kinder, more grounded alternative.'
+      },
+      'gottman-four-horsemen': {
+        id: 'gottman-four-horsemen',
+        title: 'The Four Horsemen & Antidotes in Relationships',
+        subtitle: 'Healthy Communication Patterns for Marriage and Long-Term Partnerships',
+        source: 'The Gottman Institute & PositivePsychology.com',
+        apaCitation: 'Gottman, J. M., & Silver, N. (2015). The seven principles for making marriage work: A practical guide from the country\'s foremost relationship expert. Harmony Books. See also Gottman, J. M. (1994). Why marriages succeed or fail. Simon & Schuster.',
+        category: 'Marriage & Relationship Counseling',
+        readTime: '10 min couples worksheet',
+        intro: 'In marriage and long-term partnerships, conflict is inevitable—but contempt and stonewalling are not. By practicing conscious communication antidotes, couples can navigate heated disagreements while deepening safety and trust.',
+        sections: [
+          {
+            heading: '1. Criticism ➔ Antidote: Gentle Start-Up',
+            content: [
+              'Instead of: "You never help around the house and you don\'t care how tired I am."',
+              'Practice: "I am feeling exhausted and stressed about the unfinished chores. Could we divide these tasks together tonight?" (I feel... about what... and I need...)'
+            ]
+          },
+          {
+            heading: '2. Defensiveness ➔ Antidote: Accepting Responsibility',
+            content: [
+              'Instead of: "I wouldn\'t have forgotten if you hadn\'t nagged me all morning!"',
+              'Practice: "You are right, I did forget to take care of that. I apologize. Let me handle it right now."'
+            ]
+          },
+          {
+            heading: '3. Contempt ➔ Antidote: Culture of Appreciation',
+            content: [
+              'Contempt includes eye-rolling, mockery, or insults. It is the single greatest predictor of relationship deterioration.',
+              'Practice daily verbal deposits: Express one sincere gratitude or acknowledgment to your partner every day, even when tense.'
+            ]
+          },
+          {
+            heading: '4. Stonewalling ➔ Antidote: Physiological De-escalation',
+            content: [
+              'When heart rates spike above 100 bpm, our prefrontal cortex goes offline and fight-or-flight takes over.',
+              'Practice: Agree on a safe timeout word. Take a 20-minute physical break to walk or breathe, promising to return when both are calm.'
+            ]
+          }
+        ],
+        actionPrompt: 'In your next disagreement with your partner, identify which horseman tends to show up first for you. Try using its specific antidote script.'
+      },
+      'sensate-focus-intimacy': {
+        id: 'sensate-focus-intimacy',
+        title: 'Sensate Focus & Mindfulness in Intimacy',
+        subtitle: 'Rebuilding Non-Demanding Touch and Overcoming Sexual Performance Anxiety',
+        source: 'PositivePsychology.com & Masters and Johnson',
+        apaCitation: 'Weiner, L., & Avery-Clark, C. (2014). Sensate focus: A contemporary approach. Sexual and Relationship Therapy, 29(4), 487–505. Based on Masters, W. H., & Johnson, V. E. (1970). Human sexual inadequacy. Little, Brown.',
+        category: 'Sexual Wellness & Intimacy',
+        readTime: '7 min intimacy guide',
+        intro: 'Sexual wellness is an integral part of human health and emotional connection. When intimacy becomes burdened by anxiety, body shame, or fear of disappointing a partner, physical connection often shuts down. Sensate Focus gently reclaims the joy of presence.',
+        sections: [
+          {
+            heading: '1. The Core Principle: Removing the Goal',
+            content: [
+              'In conventional intimacy, people often view orgasm or intercourse as the mandatory finish line. This generates performance anxiety.',
+              'Sensate focus deliberately removes all sexual performance goals. The sole aim is exploring sensory sensations—warmth, texture, heartbeat, and breath—without expectation.'
+            ]
+          },
+          {
+            heading: '2. Structured Steps for Couples',
+            content: [
+              'Step A (Mindful Non-Genital Touch): Partners take turns being the "toucher" and "receiver". Genital areas and breasts are strictly excluded so the nervous system feels zero pressure.',
+              'Step B (Active Feedback): The receiver gives gentle real-time guidance ("slower", "lighter", "that feels soothing") without apologizing.',
+              'Step C (Debriefing): Spend 5 minutes talking about what sensations felt grounding or where thoughts wandered.'
+            ]
+          }
+        ],
+        actionPrompt: 'Reflect on your personal relationship with intimacy: What would it feel like to experience touch where nothing was required of you?'
+      },
+      'grounding-54321': {
+        id: 'grounding-54321',
+        title: 'The 5-4-3-2-1 Sensory Grounding Technique',
+        subtitle: 'Somatic Protocol for Panic, Overthinking, and Nervous System Overwhelm',
+        source: 'TherapyAid.com',
+        apaCitation: 'Linehan, M. M. (2015). DBT skills training manual (2nd ed.). Guilford Press. See also Najavits, L. M. (2002). Seeking safety: A treatment manual for PTSD and substance abuse. Guilford Press.',
+        category: 'Emotional & Somatic Regulation',
+        readTime: '5 min practical tool',
+        intro: 'When anxiety or panic spikes, the brain triggers a survival alarm. You cannot easily reason with a physiological alarm state; you must signal physical safety directly through sensory awareness.',
+        sections: [
+          {
+            heading: 'Step-by-Step 5-4-3-2-1 Sensory Sequence',
+            content: [
+              '5 Things you can SEE: Look around your current space. Look for small details—a texture on the wall, sunlight on a surface, the grain of a desk, colors in a painting.',
+              '4 Things you can TOUCH: Bring physical awareness to touch. Feel the fabric of your clothes, the solid ground beneath your feet, the cool surface of a desk, or the warmth of your palms.',
+              '3 Things you can HEAR: Listen to background sounds without judgment—an air conditioner, distant traffic, birds outside, or your own breath.',
+              '2 Things you can SMELL: Notice subtle aromas in your environment—coffee brewing, laundry detergent on your sleeve, or fresh air.',
+              '1 Thing you can TASTE: Notice the taste in your mouth, take a sip of cool water, or relax your jaw and tongue against the roof of your mouth.'
+            ]
+          },
+          {
+            heading: 'Clinical Pairing: The Physiological Sigh',
+            content: [
+              'Take two consecutive inhales through your nose (one deep breath in, followed immediately by another short top-up inhale).',
+              'Release slowly and completely through an open mouth for 5 to 6 seconds.',
+              'Repeat 3 to 4 times to stimulate the vagus nerve and slow heart rate.'
+            ]
+          }
+        ],
+        actionPrompt: 'Practice this grounding routine once when you are calm, so your nervous system builds muscle memory for moments of heightened stress.'
+      }
+    };
+
+    let latestSubmittedIntake = null;
+
+    // Toggle FAQ
     function toggleFaq(faqId) {
       const item = document.getElementById(faqId);
       if (!item) return;
@@ -1508,15 +1798,18 @@
       if (!isActive) item.classList.add('active');
     }
 
+    // Update 1-10 Stress Level display
     function updateStressDisplay(val) {
       const display = document.getElementById('stressValueDisplay');
       if (display) display.textContent = val + ' / 10';
     }
 
+    // Emergency quick exit
     function quickExit() {
       window.location.replace('https://www.google.com');
     }
 
+    // Toggle symptom item checkbox styles
     document.querySelectorAll('.symptom-item input[type="checkbox"]').forEach(cb => {
       cb.addEventListener('change', function() {
         if (this.checked) this.closest('.symptom-item').classList.add('checked');
@@ -1524,11 +1817,39 @@
       });
     });
 
+    // Form submission handler
     function handleFormSubmit(e) {
       e.preventDefault();
       const form = document.getElementById('psychIntakeForm');
       const successCard = document.getElementById('successCard');
       const submitBtn = document.getElementById('submitBtn');
+
+      const formData = new FormData(form);
+      const symptoms = [];
+      form.querySelectorAll('input[name="symptoms"]:checked').forEach(c => symptoms.push(c.value));
+
+      latestSubmittedIntake = {
+        fullName: formData.get('fullName') || '',
+        preferredName: formData.get('preferredName') || '',
+        age: formData.get('age') || '',
+        pronouns: formData.get('pronouns') || '',
+        genderIdentity: formData.get('genderIdentity') || '',
+        email: formData.get('email') || '',
+        phone: formData.get('phone') || '',
+        consultationType: formData.get('consultationType') || 'individual',
+        emergencyName: formData.get('emergencyName') || '',
+        emergencyRelationship: formData.get('emergencyRelationship') || '',
+        emergencyPhone: formData.get('emergencyPhone') || '',
+        currentOccupationOrLifeContext: formData.get('currentOccupationOrLifeContext') || '',
+        stressLevel: formData.get('stressLevel') || '5',
+        primaryReason: formData.get('primaryReason') || '',
+        symptoms: symptoms,
+        previousTherapy: formData.get('previousTherapy') || '',
+        preferredSessionMode: formData.get('preferredSessionMode') || 'virtual_seriousmd',
+        aiTranscriberConsent: formData.get('aiTranscriberConsent') || 'agree',
+        referenceId: 'VBT-' + Math.floor(100000 + Math.random() * 900000),
+        submissionDate: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      };
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting to SeriousMD...';
@@ -1545,14 +1866,460 @@
       const successCard = document.getElementById('successCard');
       const submitBtn = document.getElementById('submitBtn');
       form.reset();
+      form.querySelectorAll('.symptom-item').forEach(el => el.classList.remove('checked'));
+      updateStressDisplay(5);
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit SeriousMD Intake Safely →';
       successCard.style.display = 'none';
       form.style.display = 'block';
     }
 
-    function downloadDemoPdf(name) {
-      window.print();
+    // Modal Preview for Worksheets
+    function previewWorksheet(resourceId) {
+      const item = THERAPY_RESOURCES[resourceId];
+      if (!item) return;
+
+      document.getElementById('modalCategory').textContent = item.category + ' · ' + item.readTime;
+      document.getElementById('modalTitle').textContent = item.title;
+
+      let sectionsHtml = '';
+      item.sections.forEach(sec => {
+        let bullets = sec.content.map(c => `<li style="margin-bottom: 0.35rem;">${c}</li>`).join('');
+        sectionsHtml += `
+          <div style="margin-top: 1.25rem;">
+            <h4 style="font-size: 1rem; color: #0E2954; font-weight: 600; margin-bottom: 0.4rem;">${sec.heading}</h4>
+            <ul style="padding-left: 1.25rem; font-size: 0.85rem; color: #475569;">${bullets}</ul>
+          </div>
+        `;
+      });
+
+      document.getElementById('modalBody').innerHTML = `
+        <p style="font-style: italic; color: #334155; background: #F1F5F9; padding: 0.85rem 1rem; border-radius: 8px; border-left: 3px solid #0E2954; margin-bottom: 1rem;">
+          "${item.intro}"
+        </p>
+        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: 0.75rem; font-family: monospace; color: #1E293B;">
+          <strong>APA Citation:</strong> ${item.apaCitation}
+        </div>
+        ${sectionsHtml}
+        <div style="background: #EFF6FC; border: 1px solid #CBE4F9; border-radius: 8px; padding: 1rem; margin-top: 1.5rem; font-size: 0.85rem; color: #0E2954;">
+          <strong>Clinical Reflection Prompt:</strong> ${item.actionPrompt}
+        </div>
+      `;
+
+      document.getElementById('modalDownloadBtn').onclick = () => downloadWorksheet(resourceId);
+      document.getElementById('worksheetModal').classList.add('open');
+    }
+
+    function closeWorksheetModal() {
+      document.getElementById('worksheetModal').classList.remove('open');
+    }
+
+    function closeModalOnOutsideClick(e) {
+      if (e.target.id === 'worksheetModal') closeWorksheetModal();
+    }
+
+    // Core PDF Generator Function: Isolated & Standalone
+    // Generates ONLY the worksheet, NEVER the rest of the website!
+    function downloadWorksheet(resourceId) {
+      const item = THERAPY_RESOURCES[resourceId];
+      if (!item) return;
+
+      // 1. Try jsPDF direct PDF download (Works client-side anywhere on GitHub Pages)
+      if (window.jspdf && window.jspdf.jsPDF) {
+        try {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4'
+          });
+
+          const pageWidth = doc.internal.pageSize.getWidth();
+          const margin = 20;
+          const contentWidth = pageWidth - margin * 2;
+          let y = 22;
+
+          // Header Bar (#CBE4F9 pale sky blue)
+          doc.setFillColor(203, 228, 249);
+          doc.rect(0, 0, pageWidth, 16, 'F');
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          doc.setTextColor(14, 41, 84);
+          doc.text('VINCENT BREN TAJOR, RPsy · REGISTERED PSYCHOLOGIST · PRC #0002156', margin, 10.5);
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8);
+          doc.setTextColor(60, 80, 100);
+          doc.text('Telehealth via SeriousMD · vtajor.psych@gmail.com', pageWidth - margin, 10.5, { align: 'right' });
+
+          // Title
+          y = 28;
+          doc.setFont('times', 'bold');
+          doc.setFontSize(17);
+          doc.setTextColor(14, 41, 84);
+          const titleLines = doc.splitTextToSize(item.title, contentWidth);
+          doc.text(titleLines, margin, y);
+          y += titleLines.length * 8;
+
+          // Subtitle
+          doc.setFont('helvetica', 'italic');
+          doc.setFontSize(10.5);
+          doc.setTextColor(70, 90, 110);
+          const subLines = doc.splitTextToSize(item.subtitle, contentWidth);
+          doc.text(subLines, margin, y);
+          y += subLines.length * 5.5 + 2;
+
+          // Metadata ribbon
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8.5);
+          doc.setTextColor(100, 115, 130);
+          doc.text(`Category: ${item.category}   |   Source: ${item.source}   |   ${item.readTime}`, margin, y);
+          y += 5;
+
+          // APA Citation Box
+          doc.setFillColor(240, 245, 252);
+          doc.setDrawColor(215, 230, 245);
+          const citationLines = doc.splitTextToSize(`APA Reference: ${item.apaCitation}`, contentWidth - 6);
+          const citationHeight = citationLines.length * 4 + 5;
+          doc.roundedRect(margin, y, contentWidth, citationHeight, 2, 2, 'FD');
+
+          doc.setFont('times', 'normal');
+          doc.setFontSize(7.5);
+          doc.setTextColor(60, 75, 95);
+          doc.text(citationLines, margin + 3, y + 4);
+          y += citationHeight + 5;
+
+          // Divider
+          doc.setDrawColor(210, 225, 240);
+          doc.setLineWidth(0.5);
+          doc.line(margin, y, pageWidth - margin, y);
+          y += 7;
+
+          // Introduction Box
+          doc.setFillColor(245, 250, 255);
+          doc.setDrawColor(200, 220, 245);
+          const introLines = doc.splitTextToSize(item.intro, contentWidth - 8);
+          const introBoxHeight = introLines.length * 4.8 + 8;
+          doc.roundedRect(margin, y, contentWidth, introBoxHeight, 3, 3, 'FD');
+
+          doc.setFont('times', 'italic');
+          doc.setFontSize(9.5);
+          doc.setTextColor(40, 50, 60);
+          doc.text(introLines, margin + 4, y + 6);
+          y += introBoxHeight + 7;
+
+          // Guide Sections
+          item.sections.forEach(sec => {
+            if (y > 240) {
+              doc.addPage();
+              y = 25;
+            }
+
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(10.5);
+            doc.setTextColor(14, 41, 84);
+            doc.text(sec.heading, margin, y);
+            y += 5.5;
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(9);
+            doc.setTextColor(45, 55, 65);
+
+            sec.content.forEach(c => {
+              const bulletLines = doc.splitTextToSize(`•  ${c}`, contentWidth - 4);
+              if (y + bulletLines.length * 4.5 > 270) {
+                doc.addPage();
+                y = 25;
+              }
+              doc.text(bulletLines, margin + 2, y);
+              y += bulletLines.length * 4.6 + 1.5;
+            });
+            y += 3.5;
+          });
+
+          // Action Prompt Box
+          if (y > 235) {
+            doc.addPage();
+            y = 25;
+          }
+          doc.setFillColor(235, 245, 255);
+          doc.setDrawColor(180, 210, 245);
+          const actionLines = doc.splitTextToSize(`Clinical Reflection: ${item.actionPrompt}`, contentWidth - 8);
+          const actionBoxHeight = actionLines.length * 5 + 8;
+          doc.roundedRect(margin, y, contentWidth, actionBoxHeight, 3, 3, 'FD');
+
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          doc.setTextColor(14, 41, 84);
+          doc.text(actionLines, margin + 4, y + 6);
+
+          // Disclaimer Footer
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(7.5);
+          doc.setTextColor(120, 130, 140);
+          doc.text(
+            'This worksheet is provided for psychological psychoeducation. It does not replace professional clinical care.',
+            pageWidth / 2,
+            285,
+            { align: 'center' }
+          );
+
+          doc.save(`${item.id}-worksheet.pdf`);
+          return;
+        } catch (err) {
+          console.warn('jsPDF generation failed, falling back to isolated print iframe:', err);
+        }
+      }
+
+      // 2. Fallback: Isolated Hidden Iframe Print
+      // Writes strictly the worksheet HTML into the hidden iframe and triggers print on that iframe ONLY
+      printViaIsolatedIframe(item);
+    }
+
+    // Isolated Hidden Iframe Print Helper
+    function printViaIsolatedIframe(item) {
+      const iframe = document.getElementById('printWorksheetIframe');
+      if (!iframe) return;
+
+      let sectionsHtml = '';
+      item.sections.forEach(sec => {
+        const bullets = sec.content.map(c => `<li style="margin-bottom: 6px;">${c}</li>`).join('');
+        sectionsHtml += `
+          <div style="margin-top: 16px;">
+            <h3 style="font-size: 14px; color: #0E2954; font-weight: bold; margin-bottom: 6px;">${sec.heading}</h3>
+            <ul style="padding-left: 20px; font-size: 12.5px; line-height: 1.5; color: #334155;">${bullets}</ul>
+          </div>
+        `;
+      });
+
+      const worksheetDoc = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>${item.title}</title>
+          <style>
+            @page {
+              size: A4;
+              margin: 15mm 20mm;
+            }
+            body {
+              font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+              color: #1E293B;
+              line-height: 1.5;
+              padding: 0;
+              margin: 0;
+            }
+            .header-bar {
+              background: #CBE4F9;
+              padding: 10px 16px;
+              display: flex;
+              justify-content: space-between;
+              font-size: 11px;
+              font-weight: bold;
+              color: #0E2954;
+              border-radius: 4px;
+              margin-bottom: 20px;
+            }
+            .title {
+              font-size: 20px;
+              color: #0E2954;
+              font-weight: bold;
+              margin-bottom: 4px;
+            }
+            .subtitle {
+              font-size: 13px;
+              color: #475569;
+              font-style: italic;
+              margin-bottom: 12px;
+            }
+            .meta {
+              font-size: 11px;
+              color: #64748B;
+              margin-bottom: 12px;
+            }
+            .citation-box {
+              background: #F1F5F9;
+              border: 1px solid #CBD5E1;
+              padding: 8px 12px;
+              font-size: 10.5px;
+              font-family: monospace;
+              border-radius: 4px;
+              margin-bottom: 16px;
+            }
+            .intro-box {
+              background: #F8FAFC;
+              border-left: 3px solid #0E2954;
+              padding: 10px 14px;
+              font-size: 12.5px;
+              font-style: italic;
+              margin-bottom: 16px;
+            }
+            .reflection-box {
+              background: #EFF6FC;
+              border: 1px solid #CBE4F9;
+              padding: 12px 14px;
+              border-radius: 6px;
+              font-size: 12px;
+              margin-top: 20px;
+              color: #0E2954;
+            }
+            .footer-disclaimer {
+              margin-top: 30px;
+              border-top: 1px solid #E2E8F0;
+              padding-top: 10px;
+              font-size: 10px;
+              text-align: center;
+              color: #94A3B8;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header-bar">
+            <span>VINCENT BREN TAJOR, RPsy · REGISTERED PSYCHOLOGIST · PRC #0002156</span>
+            <span>Telehealth via SeriousMD · vtajor.psych@gmail.com</span>
+          </div>
+          <div class="title">${item.title}</div>
+          <div class="subtitle">${item.subtitle}</div>
+          <div class="meta">Category: ${item.category} &nbsp;|&nbsp; Source: ${item.source} &nbsp;|&nbsp; ${item.readTime}</div>
+          <div class="citation-box"><strong>APA Citation:</strong> ${item.apaCitation}</div>
+          <div class="intro-box">${item.intro}</div>
+          ${sectionsHtml}
+          <div class="reflection-box"><strong>Clinical Reflection Exercise:</strong> ${item.actionPrompt}</div>
+          <div class="footer-disclaimer">
+            This worksheet is provided for psychological psychoeducation. It does not replace professional clinical care. © 2026 Vincent Bren Tajor, RPsy.
+          </div>
+        </body>
+        </html>
+      `;
+
+      const frameDoc = iframe.contentWindow || iframe.contentDocument.document || iframe.contentDocument;
+      iframe.srcdoc = worksheetDoc;
+
+      iframe.onload = () => {
+        try {
+          iframe.contentWindow.focus();
+          iframe.contentWindow.print();
+        } catch (e) {
+          console.error('Iframe print error:', e);
+        }
+      };
+    }
+
+    // Download Intake Receipt PDF
+    function downloadSubmittedReceipt() {
+      if (!latestSubmittedIntake) return;
+      const data = latestSubmittedIntake;
+
+      if (window.jspdf && window.jspdf.jsPDF) {
+        try {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+          const pageWidth = doc.internal.pageSize.getWidth();
+          const margin = 20;
+          const contentWidth = pageWidth - margin * 2;
+          let y = 20;
+
+          // Top Header Banner
+          doc.setFillColor(203, 228, 249);
+          doc.rect(0, 0, pageWidth, 18, 'F');
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(10);
+          doc.setTextColor(14, 41, 84);
+          doc.text('VINCENT BREN TAJOR, RPsy · PSYCHOTHERAPY INTAKE RECEIPT', margin, 11.5);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8.5);
+          doc.text('PRC #0002156 · SeriousMD Telehealth', pageWidth - margin, 11.5, { align: 'right' });
+
+          y = 30;
+          doc.setFont('times', 'bold');
+          doc.setFontSize(16);
+          doc.setTextColor(14, 41, 84);
+          doc.text('Client Confidential Intake Summary', margin, y);
+          y += 7;
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9);
+          doc.setTextColor(70, 85, 100);
+          doc.text(`Reference ID: ${data.referenceId}   |   Submission Date: ${data.submissionDate}`, margin, y);
+          y += 10;
+
+          const rows = [
+            ['Client Full Name', data.fullName],
+            ['Preferred Name', data.preferredName || 'None specified'],
+            ['Age & Pronouns', `${data.age} years old (${data.pronouns})`],
+            ['Gender Identity', data.genderIdentity],
+            ['Contact Email', data.email],
+            ['Mobile Phone', data.phone],
+            ['Consultation Type', data.consultationType === 'marriage_couples' ? 'Marriage & Couples (80–90 min)' : data.consultationType === 'sexual_wellness' ? 'Sexual Wellness (50–55 min)' : 'Individual Psychotherapy (50–55 min)'],
+            ['Life / Work Context', data.currentOccupationOrLifeContext],
+            ['Reported Strain Level', `${data.stressLevel} / 10`],
+            ['Emergency Contact', `${data.emergencyName} (${data.emergencyRelationship}) - ${data.emergencyPhone}`],
+            ['Location Preference', data.preferredSessionMode === 'virtual_seriousmd' ? 'Virtual (SeriousMD Telehealth)' : data.preferredSessionMode === 'in_person_mapagkalinga' ? 'In-Person (Mapagkalinga Taytay)' : 'In-Person (Aurahealth Metroeast)'],
+            ['AI Note Scribe (Heidi)', data.aiTranscriberConsent === 'agree' ? 'AGREED to AI clinical note-taking' : 'DECLINED (Manual notes only)']
+          ];
+
+          rows.forEach(([label, value]) => {
+            doc.setFillColor(248, 250, 252);
+            doc.rect(margin, y, 60, 8.5, 'F');
+            doc.rect(margin + 60, y, contentWidth - 60, 8.5, 'S');
+
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8.5);
+            doc.setTextColor(50, 65, 80);
+            doc.text(label, margin + 3, y + 5.5);
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8.5);
+            doc.setTextColor(20, 30, 40);
+            const splitVal = doc.splitTextToSize(value, contentWidth - 65);
+            doc.text(splitVal[0] || '', margin + 63, y + 5.5);
+            y += 8.5;
+          });
+
+          y += 6;
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9.5);
+          doc.setTextColor(14, 41, 84);
+          doc.text('Primary Reason for Seeking Therapy:', margin, y);
+          y += 5;
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9);
+          doc.setTextColor(40, 50, 60);
+          const reasonLines = doc.splitTextToSize(data.primaryReason, contentWidth);
+          doc.text(reasonLines, margin, y);
+          y += reasonLines.length * 4.5 + 4;
+
+          const sympText = `Symptoms: ${data.symptoms.join(', ') || 'None specified'}`;
+          const sympSplit = doc.splitTextToSize(sympText, contentWidth);
+          doc.text(sympSplit, margin, y);
+          y += sympSplit.length * 4.5 + 6;
+
+          // Next Steps
+          doc.setFillColor(235, 245, 255);
+          doc.setDrawColor(180, 210, 245);
+          doc.roundedRect(margin, y, contentWidth, 24, 3, 3, 'FD');
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          doc.setTextColor(14, 41, 84);
+          doc.text('Next Steps with Vince Tajor, RPsy:', margin + 4, y + 5.5);
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(8);
+          doc.setTextColor(40, 60, 80);
+          doc.text('1. Vince will review your intake details before your scheduled SeriousMD video session.', margin + 4, y + 11);
+          doc.text('2. Meeting links and session reminders will be sent to your email (vtajor.psych@gmail.com).', margin + 4, y + 16);
+          doc.text('3. If you ever need to reschedule, please notify at least 24 hours in advance via SeriousMD.', margin + 4, y + 21);
+
+          doc.save(`intake-receipt-${data.referenceId}.pdf`);
+          return;
+        } catch (e) {
+          console.warn('Receipt jsPDF failed:', e);
+        }
+      }
+
+      alert('Intake receipt reference: ' + data.referenceId + '. Submitted successfully to SeriousMD.');
     }
   </script>
 </body>
