@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vincent Bren Tajor, RPsy | Psychotherapy & Counseling Portal</title>
+  <meta name="description" content="Safe, compassionate psychotherapy & counseling by Vincent Bren Tajor, Registered Psychologist (PRC #0002156). Individual, Sexual Wellness, and Marriage/Couples Counseling via SeriousMD.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS Reset & Design Tokens based on Clinician Branding */
+    :root {
+      --bg-white: #FFFFFF;
+      --bg-soft-blue: #EFF6FC;
+      --bg-card: #FFFFFF;
+      --brand-sky-blue: #CBE4F9;
+      --brand-navy-dark: #0E2954;
+      --brand-navy-light: #163A75;
+      --text-main: #1E293B;
+      --text-muted: #475569;
+      --text-light: #64748B;
+      --border-subtle: #E2E8F0;
+      --border-card: #DCEAF7;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --shadow-soft: 0 4px 20px -2px rgba(14, 41, 84, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 10px 25px -4px rgba(14, 41, 84, 0.1), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-white);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    /* Crisis Ribbon */
+    .crisis-bar {
+      background: var(--bg-soft-blue);
+      border-bottom: 1px solid var(--brand-sky-blue);
+      padding: 0.5rem 1rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .crisis-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .crisis-links strong {
+      color: var(--brand-navy-dark);
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+    .safe-exit-btn {
+      background: none;
+      border: none;
+      color: #991B1B;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 100;
+    }
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 4.25rem;
+      gap: 2rem;
+    }
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--brand-navy-dark);
+      text-decoration: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .brand-badge {
+      background: var(--brand-sky-blue);
+      color: var(--brand-navy-dark);
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .brand-title span.rpsy {
+      color: #0284C7;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-links a:hover {
+      color: var(--brand-navy-dark);
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--brand-navy-dark);
+      color: #FFFFFF;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(14, 41, 84, 0.15);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      background: var(--brand-navy-light);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: #FFFFFF;
+      color: var(--text-main);
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      border: 1px solid var(--border-subtle);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-secondary:hover {
+      background: var(--bg-soft-blue);
+    }
+
+    /* Hero */
+    .hero-section {
+      padding: 4rem 0 5rem;
+      position: relative;
+      background: #FFFFFF;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .kicker {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--brand-navy-dark);
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 1.15;
+      font-weight: 500;
+      color: var(--brand-navy-dark);
+      margin-bottom: 1.25rem;
+      text-wrap: balance;
+    }
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+    .hero-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .pillar-card {
+      background: var(--bg-soft-blue);
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.2rem;
+      font-size: 0.825rem;
+      color: var(--text-muted);
+    }
+    .pillar-card strong {
+      color: var(--brand-navy-dark);
+      display: block;
+      margin-bottom: 0.25rem;
+      font-size: 0.875rem;
+    }
+    .hero-card-frame {
+      background: #FFFFFF;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+    }
+    .hero-avatar {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+      object-position: top;
+      background: var(--brand-sky-blue);
+      margin-bottom: 1rem;
+    }
+    .hero-card-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--brand-navy-dark);
+    }
+    .hero-card-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .hero-trust-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1rem;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+    }
+    .hero-trust-metrics strong {
+      display: block;
+      color: var(--brand-navy-dark);
+      font-size: 0.95rem;
+    }
+
+    /* What to Expect */
+    .expect-section {
+      background: #F8FAFC;
+      padding: 5rem 0;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: var(--brand-navy-dark);
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+    .section-desc {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .service-breakdown-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .service-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .service-time-badge {
+      background: var(--brand-sky-blue);
+      color: var(--brand-navy-dark);
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: monospace;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    .expect-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .step-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .step-num {
+      width: 2.75rem;
+      height: 2.75rem;
+      background: var(--bg-soft-blue);
+      color: var(--brand-navy-dark);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    /* FAQs */
+    .faq-section {
+      padding: 5rem 0;
+      background: #FFFFFF;
+    }
+    .faq-accordion {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .faq-item {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+    .faq-item.active {
+      border-color: var(--brand-sky-blue);
+      box-shadow: var(--shadow-soft);
+    }
+    .faq-trigger {
+      width: 100%;
+      text-align: left;
+      padding: 1.25rem 1.5rem;
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--brand-navy-dark);
+    }
+    .faq-icon {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 50%;
+      background: var(--bg-soft-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--brand-navy-dark);
+      transition: transform 0.25s ease;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-body {
+      padding: 0 1.5rem 1.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      display: none;
+      border-top: 1px solid rgba(0,0,0,0.04);
+      padding-top: 1rem;
+    }
+    .faq-item.active .faq-body {
+      display: block;
+    }
+
+    /* Intake Form */
+    .intake-section {
+      padding: 5rem 0;
+      background: #FFFFFF;
+    }
+    .intake-form-wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #F8FAFC;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-xl);
+      padding: 3rem;
+      box-shadow: var(--shadow-soft);
+    }
+    .form-group-section {
+      margin-bottom: 2.75rem;
+      padding-bottom: 2.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .form-group-section:last-of-type {
+      border-bottom: none;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0;
+    }
+    .form-sec-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--brand-navy-dark);
+      margin-bottom: 0.25rem;
+    }
+    .form-sec-sub {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .form-col-full {
+      grid-column: 1 / -1;
+    }
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .input-field label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .input-field label span.req {
+      color: #991B1B;
+    }
+    .input-field input, .input-field select, .input-field textarea {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border: 1px solid #CBD5E1;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--text-main);
+      background: #FFFFFF;
+      transition: all 0.2s ease;
+    }
+    .input-field input:focus, .input-field select:focus, .input-field textarea:focus {
+      outline: none;
+      border-color: var(--brand-navy-dark);
+      box-shadow: 0 0 0 3px rgba(14, 41, 84, 0.12);
+    }
+
+    /* AI Transcriber Box */
+    .ai-consent-box {
+      background: var(--bg-soft-blue);
+      border: 1px solid var(--brand-sky-blue);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .ai-consent-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+    .ai-consent-option {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    /* Stress Slider */
+    .stress-slider-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-top: 1.25rem;
+    }
+    .stress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .stress-badge {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--brand-navy-dark);
+    }
+    .slider-range {
+      width: 100%;
+      height: 6px;
+      border-radius: 4px;
+      background: #CBD5E1;
+      accent-color: var(--brand-navy-dark);
+      cursor: pointer;
+    }
+    .stress-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+    }
+
+    /* Symptoms */
+    .symptom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+    .symptom-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      color: var(--text-main);
+      cursor: pointer;
+      background: #FFFFFF;
+    }
+    .symptom-item.checked {
+      background: var(--bg-soft-blue);
+      border-color: var(--brand-navy-dark);
+      font-weight: 600;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--brand-navy-dark);
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 600;
+      padding: 1.1rem;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(14, 41, 84, 0.2);
+      transition: all 0.25s ease;
+    }
+    .btn-submit:hover {
+      background: var(--brand-navy-light);
+      transform: translateY(-2px);
+    }
+
+    /* Resources Section */
+    .resources-section {
+      padding: 5rem 0 6rem;
+      background: #F8FAFC;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .resource-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .resource-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.25s ease;
+    }
+    .resource-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+    .resource-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--brand-navy-dark);
+      background: var(--bg-soft-blue);
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #0B1E3B;
+      color: #CBD5E1;
+      padding: 4.5rem 0 2.5rem;
+      font-size: 0.825rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+    .footer-col h4 {
+      color: #FFFFFF;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+    }
+    .footer-col p {
+      line-height: 1.65;
+      color: #94A3B8;
+      margin-bottom: 0.75rem;
+    }
+    .footer-bottom {
+      border-top: 1px solid #1E293B;
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: #64748B;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .service-breakdown-grid, .expect-steps-grid, .resource-grid, .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 640px) {
+      .intake-form-wrapper { padding: 1.5rem; }
+      .form-grid-2, .form-grid-3, .symptom-grid, .ai-consent-options { grid-template-columns: 1fr; }
+    }
+  </style>
+<script src="/_aistudio-iframe.js?v=6634132a"></script></head>
+<body>
+
+  <!-- Safety Ribbon -->
+  <div class="crisis-bar">
+    <div class="crisis-inner">
+      <div class="crisis-links">
+        <span>In Distress? 24/7 Philippines Crisis Support: </span>
+        <span>NCMH Hotline: <strong>1553</strong></span> · 
+        <span>In Touch: <strong>+63 917 800 1123</strong></span>
+      </div>
+      <button class="safe-exit-btn" onclick="quickExit()" title="Quick exit to Google">Safe Exit ✕</button>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="nav-bar">
+        <a href="#" class="brand-title" style="display: flex; align-items: center; gap: 0.75rem;">
+          <img src="/public/assets/aistudio/main_1146916a.png" alt="Vincent Tajor Clinical Psychologist Logo" style="height: 2.75rem; width: auto; object-fit: contain;" onerror="this.src='/assets/aistudio/main_1146916a.png'">
+          <div>
+            <div style="line-height: 1.2;">Vincent Bren Tajor, <span class="rpsy">RPsy</span></div>
+            <div style="font-size: 0.65rem; color: var(--text-light); font-family: var(--font-body); font-weight: 500; text-transform: uppercase;">PRC Lic. #0002156</div>
+          </div>
+        </a>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#about">About Vince</a></li>
+            <li><a href="#services">Services & Sessions</a></li>
+            <li><a href="#modalities">My Modalities</a></li>
+            <li><a href="#how-it-works">What to Expect</a></li>
+            <li><a href="#faqs">FAQs</a></li>
+            <li><a href="#resources">Free Worksheets</a></li>
+          </ul>
+        </nav>
+        <a href="#intake" class="btn-primary">Begin Intake Form</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="about" class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">PRC Registered Psychologist #0002156 · SeriousMD Practice</div>
+          <h1 class="hero-title">Welcome to a Safe Space for Your Healing Journey</h1>
+          <p class="hero-bio">
+            Kumusta? I am <strong>Vincent Bren Tajor</strong>, a Registered Psychologist. I provide compassionate, evidence-based psychotherapy and counseling for individuals and couples navigating life transitions, emotional distress, relationship strain, sexual wellness, and personal healing.
+          </p>
+
+          <div class="hero-pillars">
+            <div class="pillar-card">
+              <strong>Individual Psychotherapy (50–55 min)</strong>
+              Anxiety, depression, emotional regulation, life stress, and self-worth.
+            </div>
+            <div class="pillar-card">
+              <strong>Marriage & Couples (80–90 min)</strong>
+              Communication de-escalation, rebuilding trust, and marital healing.
+            </div>
+            <div class="pillar-card">
+              <strong>Sexual Wellness & Intimacy (50–55 min)</strong>
+              De-stigmatizing intimacy concerns, performance anxiety, and sensual comfort.
+            </div>
+            <div class="pillar-card">
+              <strong>LGBTQ+ Affirmative Care</strong>
+              SOGIESC-inclusive exploration, chosen families, and navigating stigma.
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+            <a href="#intake" class="btn-primary">Fill Out SeriousMD Intake Form</a>
+            <a href="#services" class="btn-secondary">View Session Details</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="hero-card-frame">
+            <img src="/public/assets/aistudio/DSC05497_b8866ad4.jpg" alt="Vincent Bren Tajor, Registered Psychologist" class="hero-avatar">
+            <div class="hero-card-name">Vincent Bren Tajor, RPsy</div>
+            <div class="hero-card-sub">Registered Psychologist · PRC Lic. #0002156</div>
+            <div class="hero-trust-metrics">
+              <div>
+                <strong>SeriousMD</strong>
+                <span>Virtual Care</span>
+              </div>
+              <div style="border-left: 1px solid var(--border-subtle); border-right: 1px solid var(--border-subtle);">
+                <strong>PRC #0002156</strong>
+                <span>Licensed</span>
+              </div>
+              <div>
+                <strong>Affirmative</strong>
+                <span>Safe Space</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services & What to Expect Section -->
+  <section id="services" class="expect-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">Clinical Services & Modalities</div>
+        <h2 class="section-title">Session Formats & Durations</h2>
+        <p class="section-desc">
+          Virtual consultations conducted through SeriousMD Telehealth. Tailored session lengths ensure ample breathing room for emotional depth.
+        </p>
+      </div>
+
+      <div class="service-breakdown-grid">
+        <div class="service-box">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #0284C7; text-transform: uppercase;">Individual Consultation</span>
+              <span class="service-time-badge">50–55 Minutes</span>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">
+              Individual Psychotherapy
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+              One-on-one sessions addressing anxiety, depressive moods, workplace burnout, personal identity, and sexual wellness concerns. Concludes with practical somatic grounding or actionable reflections for your week.
+            </p>
+          </div>
+        </div>
+
+        <div class="service-box">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #4338CA; text-transform: uppercase;">Marriage & Couples</span>
+              <span class="service-time-badge">80–90 Minutes</span>
+            </div>
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">
+              Marriage & Relationship Counseling
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+              Extended time provides equal, non-rushed space for both partners to unpack recurring conflict, explore emotional disconnect, and practice Gottman repair strategies.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="expect-steps-grid">
+        <div class="step-card">
+          <div>
+            <div class="step-num">01</div>
+            <h3 style="font-size: 1.15rem; font-weight: 600; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">Initial Assessment Phase</h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+              The first session is simply an assessment phase to get to know you. There are no right or wrong answers. You set the pace.
+            </p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div>
+            <div class="step-num">02</div>
+            <h3 style="font-size: 1.15rem; font-weight: 600; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">Collaborative Co-Piloting</h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+              Therapy is an active collaboration. You are the expert of your lived experience; Vince contributes psychological models and objective reflections.
+            </p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div>
+            <div class="step-num">03</div>
+            <h3 style="font-size: 1.15rem; font-weight: 600; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">Actionable Strategies</h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6;">
+              Beyond talk, you take home concrete tools: CBT thought restructuring, communication repair phrases, and nervous system regulation exercises.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Partner Clinic Notice & FB links -->
+      <div style="background: #FFFFFF; border: 1px solid var(--border-card); border-radius: var(--radius-lg); padding: 1.5rem; margin-top: 1.5rem;">
+        <div style="font-weight: 600; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Virtual SeriousMD Practice & In-Person Partner Clinics</div>
+        <p style="font-size: 0.825rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Primary sessions are conducted virtually on SeriousMD. For in-person sessions, please note that bookings are made directly through each clinic's reception/front desk:
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div style="background: #F8FAFC; padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); font-size: 0.8rem;">
+            <strong>Mapagkalinga Psychological Services</strong> (Taytay, Rizal · Saturdays)
+            <div style="margin-top: 0.5rem;">
+              <a href="https://www.facebook.com/mapagkalingarizal" target="_blank" rel="noopener noreferrer" style="color: var(--brand-navy-dark); font-weight: 600; text-decoration: underline;">
+                Visit Mapagkalinga Facebook Page →
+              </a>
+            </div>
+          </div>
+          <div style="background: #F8FAFC; padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); font-size: 0.8rem;">
+            <strong>Aurahealth Rehab East Clinic</strong> (Robinsons Metroeast · Fridays)
+            <div style="margin-top: 0.5rem;">
+              <a href="https://www.facebook.com/aurahealthrehabeast" target="_blank" rel="noopener noreferrer" style="color: var(--brand-navy-dark); font-weight: 600; text-decoration: underline;">
+                Visit Aurahealth East Facebook Page →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modalities Section (Eclectic & Culturally Grounded) -->
+  <section id="modalities" class="expect-section" style="background: #FFFFFF;">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">Integrative Psychological Framework</div>
+        <h2 class="section-title">My Modalities: An Eclectic Approach</h2>
+        <p class="section-desc">
+          An <strong>"eclectic approach"</strong> means Vince doesn’t force you into a one-size-fits-all formula. Because your story, challenges, and cultural background are unique, sessions thoughtfully blend the most effective evidence-based modalities tailored to what helps you heal.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <!-- CBT -->
+        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">CBT</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Evidence-Based</span>
+            </div>
+            <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Cognitive Behavioral Therapy</h3>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Untangling Thoughts, Feelings & Actions</div>
+            <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
+              When stress hits, our minds produce automatic negative thoughts (jumping to worst cases or assuming failure). In CBT, we put those thoughts on trial against objective reality to replace cognitive distortions with calm, balanced beliefs.
+            </p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
+            Best for: anxiety spirals, depressive thoughts, panic, catastrophizing.
+          </div>
+        </div>
+
+        <!-- ACT -->
+        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">ACT</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Evidence-Based</span>
+            </div>
+            <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Acceptance & Commitment Therapy</h3>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Dropping the Internal Tug-of-War</div>
+            <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
+              Suppressing difficult feelings often makes them push back harder. ACT fosters psychological flexibility: making mindful room for tough emotions without letting them control you, while taking committed steps toward what matters most.
+            </p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
+            Best for: chronic stress, avoidance, feeling stuck, value realignment.
+          </div>
+        </div>
+
+        <!-- REBT -->
+        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">REBT</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Evidence-Based</span>
+            </div>
+            <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Rational Emotive Behavior Therapy</h3>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Challenging Rigid Demands & "Musts"</div>
+            <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
+              REBT identifies toxic perfectionism and rigid self-demands ("I must never fail", "Everyone must approve of me"). We transform rigid demands into healthy preferences and unconditional self-acceptance.
+            </p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
+            Best for: perfectionism, imposter syndrome, fear of judgment.
+          </div>
+        </div>
+
+        <!-- SFBT -->
+        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">SFBT</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Evidence-Based</span>
+            </div>
+            <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Solution-Focused Brief Therapy</h3>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Building on Strengths & Preferred Future</div>
+            <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
+              Instead of getting bogged down analyzing every past wound, SFBT identifies what has worked in your life, amplifies your resilience, and designs actionable steps for momentum.
+            </p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
+            Best for: life transitions, goal setting, overcoming inertia.
+          </div>
+        </div>
+
+        <!-- Rogerian -->
+        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">Rogerian</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Person-Centered</span>
+            </div>
+            <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Rogerian / Person-Centered Care</h3>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Unconditional Regard & Empathy</div>
+            <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
+              You will never receive cold, detached lectures. Carl Rogers' person-centered philosophy provides deep, genuine empathy and non-judgmental acceptance so your innate healing capacity can flourish.
+            </p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
+            Best for: shame, emotional isolation, feeling unheard, vulnerability.
+          </div>
+        </div>
+
+        <!-- Gottman -->
+        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">Gottman</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Couples Method</span>
+            </div>
+            <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">The Gottman Method</h3>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Science-Backed Relational Healing</div>
+            <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
+              Based on 40+ years of research with thousands of couples. We target the 4 Horsemen (criticism, defensiveness, contempt, stonewalling) and practice practical conversational antidotes to rebuild trust and intimacy.
+            </p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
+            Best for: marital conflict, communication barriers, intimacy disconnect.
+          </div>
+        </div>
+
+        <!-- Sikolohiyang Pilipino -->
+        <div class="step-card" style="display: flex; flex-direction: column; justify-content: space-between; grid-column: 1 / -1;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #0E2954; background: #EFF6FC; padding: 0.2rem 0.5rem; border-radius: 4px;">Sikolohiyang Pilipino</span>
+              <span style="font-size: 0.7rem; color: #64748B;">Culturally Grounded</span>
+            </div>
+            <h3 style="font-size: 1.1rem; color: var(--brand-navy-dark); margin-bottom: 0.25rem;">Filipino Psychology & Psychoeducation</h3>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #0284C7; margin-bottom: 0.5rem;">Honoring Kapwa, Utang na Loob & the Filipino Reality</div>
+            <p style="font-size: 0.825rem; color: var(--text-muted); line-height: 1.6;">
+              Western therapy often misunderstands the collective Filipino family. Vince integrates indigenous concepts like <em>kapwa</em> (shared identity) and explores healthy adult boundaries with parents or partners without invalidating filial love, respect, or cultural identity.
+            </p>
+          </div>
+          <div style="font-size: 0.75rem; color: #64748B; margin-top: 1rem; border-top: 1px solid #E2E8F0; padding-top: 0.5rem;">
+            Best for: family boundary strain, breadwinner pressure, navigating "tampo", and cultural identity.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQs Section -->
+  <section id="faqs" class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">Anxiety-Reducing Clarity</div>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-desc">
+          Answers regarding SeriousMD sessions, session duration, and AI transcription (Heidi Health).
+        </p>
+      </div>
+
+      <div class="faq-accordion">
+        <div class="faq-item active" id="faq1">
+          <button class="faq-trigger" onclick="toggleFaq('faq1')">
+            <span>How long does a session last?</span>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-body">
+            Standard individual psychotherapy and sexual wellness consultations are 50 to 55 minutes. For marriage and couples counseling, sessions are 80 to 90 minutes to ensure both partners have balanced time to be heard without rushing.
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq2">
+          <button class="faq-trigger" onclick="toggleFaq('faq2')">
+            <span>How do virtual sessions work via SeriousMD?</span>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-body">
+            You will receive a private, encrypted SeriousMD telehealth link via email and SMS prior to your appointment. You can join from your smartphone, tablet, or laptop in a quiet, confidential location.
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq3">
+          <button class="faq-trigger" onclick="toggleFaq('faq3')">
+            <span>What is Heidi Health and why is my consent asked?</span>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-body">
+            To provide 100% undivided eye contact without constantly typing on a keyboard, Vince utilizes Heidi Health, a HIPAA-compliant, encrypted AI clinical scribe for note-taking. It does not train models on client audio. You are free to agree or decline on the intake form with zero impact on care.
+          </div>
+        </div>
+
+        <div class="faq-item" id="faq4">
+          <button class="faq-trigger" onclick="toggleFaq('faq4')">
+            <span>Can I also consult in person?</span>
+            <div class="faq-icon">+</div>
+          </button>
+          <div class="faq-body">
+            While SeriousMD virtual sessions are the primary channel, in-person consultations are available at partner clinics: Mapagkalinga Psychological Services in Taytay, Rizal (Saturdays) and Aurahealth Rehab East Clinic at Robinsons Metroeast (Fridays).
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intake Form Section -->
+  <section id="intake" class="intake-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">Confidential Client Assessment</div>
+        <h2 class="section-title">Psychotherapy & Counseling Intake Form</h2>
+        <p class="section-desc">
+          Prepared for Vincent Bren Tajor, RPsy (PRC #0002156). Please complete prior to your SeriousMD session.
+        </p>
+      </div>
+
+      <div class="intake-form-wrapper">
+        <div id="successCard" style="display: none; text-align: center; background: #FFFFFF; border: 1px solid var(--brand-sky-blue); padding: 3rem; border-radius: var(--radius-xl);">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">🌿</div>
+          <h3 style="font-family: var(--font-display); font-size: 1.8rem; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">Maraming Salamat</h3>
+          <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 1.5rem; font-size: 0.95rem;">
+            Your intake details have been securely recorded. Vince Tajor, RPsy will review your background before your scheduled SeriousMD video session.
+          </p>
+          <button class="btn-secondary" onclick="resetForm()">Submit Another Intake / Clear</button>
+        </div>
+
+        <form id="psychIntakeForm" action="" method="POST" onsubmit="handleFormSubmit(event)">
+          
+          <!-- SERVICE SELECTION -->
+          <div class="form-group-section">
+            <h3 class="form-sec-title">Consultation Service & Duration</h3>
+            <p class="form-sec-sub">Select your intended clinical consultation service.</p>
+
+            <div class="form-grid-3">
+              <label class="ai-consent-option">
+                <input type="radio" name="consultationType" value="individual" checked>
+                <div>
+                  <strong>Individual Therapy</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-light);">50–55 Minutes</div>
+                </div>
+              </label>
+
+              <label class="ai-consent-option">
+                <input type="radio" name="consultationType" value="marriage_couples">
+                <div>
+                  <strong>Marriage & Couples</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-light);">80–90 Minutes</div>
+                </div>
+              </label>
+
+              <label class="ai-consent-option">
+                <input type="radio" name="consultationType" value="sexual_wellness">
+                <div>
+                  <strong>Sexual Wellness</strong>
+                  <div style="font-size: 0.75rem; color: var(--text-light);">50–55 Minutes</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- SECTION 1: Basic Information -->
+          <div class="form-group-section">
+            <h3 class="form-sec-title">Section 1: Basic Information</h3>
+            <p class="form-sec-sub">Your personal identifiers and safe communication channels.</p>
+
+            <div class="form-grid-2">
+              <div class="input-field">
+                <label for="fullName">Full Name <span class="req">*</span></label>
+                <input type="text" id="fullName" name="fullName" placeholder="e.g. Maria Santos" required>
+              </div>
+
+              <div class="input-field">
+                <label for="preferredName">Preferred Name / Nickname</label>
+                <input type="text" id="preferredName" name="preferredName" placeholder="e.g. Mia">
+              </div>
+
+              <div class="input-field">
+                <label for="age">Age <span class="req">*</span></label>
+                <input type="number" id="age" name="age" min="16" max="110" placeholder="e.g. 28" required>
+              </div>
+
+              <div class="input-field">
+                <label for="pronouns">Pronouns <span class="req">*</span></label>
+                <input type="text" id="pronouns" name="pronouns" placeholder="e.g. she/her, he/him, they/them" required>
+              </div>
+
+              <div class="input-field form-col-full">
+                <label for="genderIdentity">Gender Identity <span class="req">*</span></label>
+                <select id="genderIdentity" name="genderIdentity" required>
+                  <option value="">Select gender identity...</option>
+                  <option value="Cisgender Woman">Cisgender Woman</option>
+                  <option value="Cisgender Man">Cisgender Man</option>
+                  <option value="Transgender Woman">Transgender Woman</option>
+                  <option value="Transgender Man">Transgender Man</option>
+                  <option value="Non-binary / Genderqueer">Non-binary / Genderqueer</option>
+                  <option value="Questioning">Questioning / Exploring</option>
+                  <option value="Self-describe">Self-describe</option>
+                </select>
+              </div>
+
+              <div class="input-field">
+                <label for="email">Safe Email Address <span class="req">*</span></label>
+                <input type="email" id="email" name="email" placeholder="your.email@gmail.com" required>
+                <small>SeriousMD session invitations will be sent here.</small>
+              </div>
+
+              <div class="input-field">
+                <label for="phone">Phone Number <span class="req">*</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="+63 917 123 4567" required>
+                <small>Used for SMS appointment reminders.</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 2: Emergency Contact -->
+          <div class="form-group-section">
+            <h3 class="form-sec-title">Section 2: Emergency Contact</h3>
+            <p class="form-sec-sub">Standard psychological protocol in the unlikely event of acute distress.</p>
+
+            <div class="form-grid-3">
+              <div class="input-field">
+                <label for="emergName">Contact Name <span class="req">*</span></label>
+                <input type="text" id="emergName" name="emergencyName" placeholder="e.g. Antonio Santos" required>
+              </div>
+
+              <div class="input-field">
+                <label for="emergRel">Relationship <span class="req">*</span></label>
+                <input type="text" id="emergRel" name="emergencyRelationship" placeholder="e.g. Spouse, Partner, Parent" required>
+              </div>
+
+              <div class="input-field">
+                <label for="emergPhone">Emergency Phone <span class="req">*</span></label>
+                <input type="tel" id="emergPhone" name="emergencyPhone" placeholder="+63 918 765 4321" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 3: Life Context & Stress Slider -->
+          <div class="form-group-section">
+            <h3 class="form-sec-title">Section 3: Life Context & Baseline Strain</h3>
+            <p class="form-sec-sub">Current routine and emotional strain index.</p>
+
+            <div class="input-field">
+              <label for="occupation">Current Occupation, Field of Study, or Life Context <span class="req">*</span></label>
+              <input type="text" id="occupation" name="currentOccupationOrLifeContext" placeholder="e.g. Senior Graphic Designer, College Student, Freelancer..." required>
+            </div>
+
+            <div class="stress-slider-box">
+              <div class="stress-header">
+                <div>
+                  <label for="stressSlider" style="font-size: 0.875rem; font-weight: 600; color: var(--brand-navy-dark);">
+                    Overall Life / Emotional Strain Level (1 to 10)
+                  </label>
+                  <div style="font-size: 0.75rem; color: var(--text-light);">Intensity of strain over the past 2 weeks</div>
+                </div>
+                <div class="stress-badge" id="stressValueDisplay">5 / 10</div>
+              </div>
+              <input type="range" id="stressSlider" name="stressLevel" min="1" max="10" value="5" class="slider-range" oninput="updateStressDisplay(this.value)">
+              <div class="stress-ticks">
+                <span>1 (Mild/Calm)</span>
+                <span>5 (Moderate Strain)</span>
+                <span>10 (Severe Overwhelm)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 4: Clinical Context & Heidi Health AI Consent -->
+          <div class="form-group-section">
+            <h3 class="form-sec-title">Section 4: Clinical Context & Consent</h3>
+            <p class="form-sec-sub">Reason for therapy, symptoms, and clinical documentation consent.</p>
+
+            <div class="input-field" style="margin-bottom: 1.25rem;">
+              <label for="primaryReason">Primary Reason for Seeking Therapy Today <span class="req">*</span></label>
+              <textarea id="primaryReason" name="primaryReason" rows="3" placeholder="What brings you in? (e.g. anxiety, marital conflict, intimacy concerns, grief, major life transition)..." required></textarea>
+            </div>
+
+            <div class="input-field" style="margin-bottom: 1.25rem;">
+              <label>Current Symptoms & Areas of Concern (Check all that apply) <span class="req">*</span></label>
+              <div class="symptom-grid">
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Workplace Burnout & Chronic Exhaustion"> Workplace Burnout & Exhaustion</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Corporate / Academic Pressure"> Corporate / Academic Pressure</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Workplace Imposter Phenomenon"> Workplace Imposter Phenomenon</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Toxic Work Culture & Boss Conflict"> Toxic Work Culture & Boss Conflict</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Overtime & Work-Life Boundary Dissolution"> Overtime & Boundary Dissolution</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Sunday Scaries & Anticipatory Anxiety"> Sunday Scaries & Anticipatory Anxiety</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Anxiety & Panic"> Anxiety & Panic Symptoms</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Marriage & Relationship Conflict"> Marriage / Relationship Conflict</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Sexual Wellness & Intimacy"> Sexual Wellness & Intimacy</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Depressive Moods & Emptiness"> Depressive Moods</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="LGBTQ+ Identity Exploration"> LGBTQ+ Identity Exploration</label>
+                <label class="symptom-item"><input type="checkbox" name="symptoms" value="Sleep Disturbances & Insomnia"> Sleep Disturbances & Insomnia</label>
+              </div>
+            </div>
+
+            <div class="input-field" style="margin-bottom: 1.25rem;">
+              <label for="prevTherapy">Have you attended therapy before? <span class="req">*</span></label>
+              <select id="prevTherapy" name="previousTherapy" required>
+                <option value="">Select option...</option>
+                <option value="no_first_time">No, this is my first time</option>
+                <option value="yes_helpful">Yes, and it was helpful</option>
+                <option value="yes_mixed">Yes, but had mixed experience</option>
+              </select>
+            </div>
+
+            <!-- Consultation Location & Mode Preference -->
+            <div class="input-field" style="margin-bottom: 1.25rem;">
+              <label>Consultation Location Preference</label>
+              <div class="form-grid-3">
+                <label class="ai-consent-option">
+                  <input type="radio" name="preferredSessionMode" value="virtual_seriousmd" checked>
+                  <div>
+                    <strong>Virtual (SeriousMD)</strong>
+                    <div style="font-size: 0.7rem; color: #0284C7;">Primary Telehealth</div>
+                  </div>
+                </label>
+                <label class="ai-consent-option">
+                  <input type="radio" name="preferredSessionMode" value="in_person_mapagkalinga">
+                  <div>
+                    <strong>Mapagkalinga (Taytay)</strong>
+                    <div style="font-size: 0.7rem; color: #64748B;">Saturdays (Front desk booking)</div>
+                  </div>
+                </label>
+                <label class="ai-consent-option">
+                  <input type="radio" name="preferredSessionMode" value="in_person_aurahealth">
+                  <div>
+                    <strong>Aurahealth (Metroeast)</strong>
+                    <div style="font-size: 0.7rem; color: #64748B;">Fridays (Front desk booking)</div>
+                  </div>
+                </label>
+              </div>
+              <small style="color: var(--text-light); margin-top: 0.4rem; display: block;">
+                Note: In-person slots must be booked directly with the clinic front desk: 
+                <a href="https://www.facebook.com/mapagkalingarizal" target="_blank" rel="noopener noreferrer" style="color: var(--brand-navy-dark); font-weight: 600;">Mapagkalinga FB</a> · 
+                <a href="https://www.facebook.com/aurahealthrehabeast" target="_blank" rel="noopener noreferrer" style="color: var(--brand-navy-dark); font-weight: 600;">Aurahealth FB</a>.
+              </small>
+            </div>
+
+            <!-- HEIDI HEALTH AI NOTE-TAKING CONSENT -->
+            <div class="ai-consent-box">
+              <strong style="color: var(--brand-navy-dark); font-size: 0.85rem; display: block; margin-bottom: 0.25rem;">
+                AI Clinical Documentation Consent (Heidi Health) <span class="req">*</span>
+              </strong>
+              <p style="font-size: 0.775rem; color: var(--text-muted); line-height: 1.5;">
+                Vince utilizes <strong>Heidi Health</strong>, a HIPAA-compliant, encrypted AI clinical scribe for note-taking so he can provide 100% eye contact and presence without constantly typing on a keyboard. Data is never used for AI training.
+              </p>
+              <div class="ai-consent-options">
+                <label class="ai-consent-option">
+                  <input type="radio" name="aiTranscriberConsent" value="agree" checked required>
+                  <span>I AGREE to Heidi Health AI note-taking</span>
+                </label>
+                <label class="ai-consent-option">
+                  <input type="radio" name="aiTranscriberConsent" value="disagree">
+                  <span>I PREFER NOT to have AI note-taking (Manual notes only)</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="input-field" style="margin-top: 1.25rem;">
+              <label style="display: flex; gap: 0.6rem; align-items: flex-start; cursor: pointer; font-size: 0.775rem; color: var(--text-muted);">
+                <input type="checkbox" id="consent" name="consentChecked" required style="margin-top: 0.15rem; accent-color: var(--brand-navy-dark);">
+                <span>I confirm that all shared information is voluntary and protected under the Data Privacy Act (RA 10173) and PAP clinical code of ethics.</span>
+              </label>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem;">
+            <button type="submit" class="btn-submit" id="submitBtn">
+              Submit SeriousMD Intake Safely →
+            </button>
+            <p style="text-align: center; font-size: 0.75rem; color: var(--text-light); margin-top: 0.5rem;">
+              🔒 256-Bit Encrypted. Reviewed personally by Vincent Bren Tajor, RPsy (PRC #0002156).
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Free Resources Section -->
+  <section id="resources" class="resources-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="kicker">TherapyAid & PositivePsychology.com Tools</div>
+        <h2 class="section-title">Free Clinical Worksheets (PDF)</h2>
+        <p class="section-desc">
+          Download evidence-based worksheets adapted from recognized clinical psychology repositories.
+        </p>
+      </div>
+
+      <div class="resource-grid">
+        <div class="resource-card">
+          <div>
+            <div class="resource-tag">Cognitive Behavioral Therapy · 8 Min</div>
+            <h3 style="font-family: var(--font-display); font-size: 1.3rem; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">
+              CBT Thought Record Worksheet
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem;">
+              Core cognitive restructuring tool for identifying automatic negative thoughts and building balanced alternative beliefs. (Source: TherapyAid).
+            </p>
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 0.6rem; margin-bottom: 1rem; font-size: 0.725rem; font-family: monospace; color: #334155;">
+              <strong>APA Citation:</strong> Greenberger, D., & Padesky, C. A. (2015). <em>Mind over mood: Change how you feel by changing the way you think</em> (2nd ed.). Guilford Press.
+            </div>
+          </div>
+          <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadDemoPdf('CBT-Thought-Record')">
+            Download PDF ↓
+          </button>
+        </div>
+
+        <div class="resource-card">
+          <div>
+            <div class="resource-tag">Marriage & Couples · 10 Min</div>
+            <h3 style="font-family: var(--font-display); font-size: 1.3rem; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">
+              Gottman Four Horsemen & Antidotes
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem;">
+              De-escalate criticism, defensiveness, contempt, and stonewalling in marriage. (Source: The Gottman Institute / PositivePsychology).
+            </p>
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 0.6rem; margin-bottom: 1rem; font-size: 0.725rem; font-family: monospace; color: #334155;">
+              <strong>APA Citation:</strong> Gottman, J. M., & Silver, N. (2015). <em>The seven principles for making marriage work</em>. Harmony Books.
+            </div>
+          </div>
+          <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadDemoPdf('Gottman-Relationship-Guide')">
+            Download PDF ↓
+          </button>
+        </div>
+
+        <div class="resource-card">
+          <div>
+            <div class="resource-tag">Sexual Wellness · 7 Min</div>
+            <h3 style="font-family: var(--font-display); font-size: 1.3rem; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">
+              Sensate Focus & Intimacy Mindfulness
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem;">
+              Overcome sexual performance anxiety and rebuild mindful, non-demanding touch. (Source: PositivePsychology.com).
+            </p>
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 0.6rem; margin-bottom: 1rem; font-size: 0.725rem; font-family: monospace; color: #334155;">
+              <strong>APA Citation:</strong> Weiner, L., & Avery-Clark, C. (2014). Sensate focus: A contemporary approach. <em>Sexual and Relationship Therapy</em>, 29(4), 487–505.
+            </div>
+          </div>
+          <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadDemoPdf('Sensate-Focus-Intimacy-Guide')">
+            Download PDF ↓
+          </button>
+        </div>
+
+        <div class="resource-card">
+          <div>
+            <div class="resource-tag">Emotional Regulation · 5 Min</div>
+            <h3 style="font-family: var(--font-display); font-size: 1.3rem; color: var(--brand-navy-dark); margin-bottom: 0.5rem;">
+              5-4-3-2-1 Sensory Grounding Technique
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem;">
+              Rapid sensory protocol to soothe panic attacks and sensory overwhelm. (Source: TherapyAid).
+            </p>
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: var(--radius-sm); padding: 0.6rem; margin-bottom: 1rem; font-size: 0.725rem; font-family: monospace; color: #334155;">
+              <strong>APA Citation:</strong> Linehan, M. M. (2015). <em>DBT skills training manual</em> (2nd ed.). Guilford Press.
+            </div>
+          </div>
+          <button class="btn-primary" style="font-size: 0.8rem; padding: 0.5rem 1rem;" onclick="downloadDemoPdf('54321-Grounding-Technique')">
+            Download PDF ↓
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Vincent Bren Tajor, RPsy</h4>
+          <p>
+            Registered Psychologist (PRC #0002156). Individual Psychotherapy, Sexual Wellness, and Marriage Counseling.
+          </p>
+          <p>Email: <a href="mailto:vtajor.psych@gmail.com" style="color: #38BDF8;">vtajor.psych@gmail.com</a></p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Practice & Clinic Hours</h4>
+          <p>Primary: SeriousMD Telehealth (Virtual)</p>
+          <p>Mapagkalinga Services, Taytay, Rizal (Saturdays)</p>
+          <p>Aurahealth Rehab East, Robinsons Metroeast (Fridays)</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>24/7 Philippines Helplines</h4>
+          <p><strong>NCMH Hotline:</strong> 1553 (Toll-Free)</p>
+          <p><strong>In Touch Services:</strong> +63 917 800 1123</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Vincent Bren Tajor, RPsy. All rights reserved.</div>
+        <div>Strict Patient Confidentiality · RA 10173 Compliant</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Embedded Vanilla JS -->
+  <script>
+    function toggleFaq(faqId) {
+      const item = document.getElementById(faqId);
+      if (!item) return;
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+      if (!isActive) item.classList.add('active');
+    }
+
+    function updateStressDisplay(val) {
+      const display = document.getElementById('stressValueDisplay');
+      if (display) display.textContent = val + ' / 10';
+    }
+
+    function quickExit() {
+      window.location.replace('https://www.google.com');
+    }
+
+    document.querySelectorAll('.symptom-item input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', function() {
+        if (this.checked) this.closest('.symptom-item').classList.add('checked');
+        else this.closest('.symptom-item').classList.remove('checked');
+      });
+    });
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('psychIntakeForm');
+      const successCard = document.getElementById('successCard');
+      const submitBtn = document.getElementById('submitBtn');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting to SeriousMD...';
+
+      setTimeout(() => {
+        form.style.display = 'none';
+        successCard.style.display = 'block';
+        successCard.scrollIntoView({ behavior: 'smooth' });
+      }, 700);
+    }
+
+    function resetForm() {
+      const form = document.getElementById('psychIntakeForm');
+      const successCard = document.getElementById('successCard');
+      const submitBtn = document.getElementById('submitBtn');
+      form.reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit SeriousMD Intake Safely →';
+      successCard.style.display = 'none';
+      form.style.display = 'block';
+    }
+
+    function downloadDemoPdf(name) {
+      window.print();
+    }
+  </script>
+</body>
+</html>
