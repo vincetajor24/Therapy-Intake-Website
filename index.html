@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vincent Bren Tajor, RPsy | Psychotherapy & Counseling Portal</title>
-<link rel="icon" href="https://drive.google.com/uc?export=view&id=1je2WcKeu0gu__AFvc6W4ZDzUqXjdPqzw" type="image/png">
   <meta name="description" content="Compassionate, evidence-based psychotherapy & counseling by Vincent Bren Tajor, Registered Psychologist (PRC #0002156). Individual Psychotherapy, Sexual Wellness, and Marriage/Couples Counseling via SeriousMD Telehealth.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
   <!-- jsPDF for standalone client-side PDF generation on GitHub Pages and external hosts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -541,7 +542,9 @@
       font-size: 0.725rem;
       color: var(--text-light);
     }
-    .input-field input, .input-field select, .input-field textarea {
+    .input-field input:not([type="checkbox"]):not([type="radio"]), 
+    .input-field select, 
+    .input-field textarea {
       width: 100%;
       padding: 0.75rem 0.9rem;
       border: 1px solid #CBD5E1;
@@ -552,7 +555,9 @@
       background: #FFFFFF;
       transition: all 0.2s ease;
     }
-    .input-field input:focus, .input-field select:focus, .input-field textarea:focus {
+    .input-field input:not([type="checkbox"]):not([type="radio"]):focus, 
+    .input-field select:focus, 
+    .input-field textarea:focus {
       outline: none;
       border-color: var(--brand-navy-dark);
       box-shadow: 0 0 0 3px rgba(14, 41, 84, 0.12);
@@ -620,29 +625,60 @@
       margin-top: 0.5rem;
     }
 
-    /* Symptoms */
+    /* Symptoms Checklist */
     .symptom-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.6rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
       margin-top: 0.5rem;
+    }
+    @media (max-width: 640px) {
+      .symptom-grid {
+        grid-template-columns: 1fr;
+      }
     }
     .symptom-item {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      padding: 0.6rem 0.8rem;
-      border: 1px solid var(--border-subtle);
+      justify-content: flex-start;
+      gap: 0.85rem;
+      padding: 0.85rem 1rem;
+      border: 1px solid #CBD5E1;
       border-radius: var(--radius-sm);
-      font-size: 0.8rem;
+      font-size: 0.875rem;
+      font-weight: 500;
       color: var(--text-main);
       cursor: pointer;
       background: #FFFFFF;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      line-height: 1.35;
+      text-align: left;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
     }
-    .symptom-item.checked {
-      background: var(--bg-soft-blue);
+    .symptom-item:hover {
+      border-color: #94A3B8;
+      background: #F8FAFC;
+    }
+    .symptom-item input[type="checkbox"] {
+      width: 1.2rem !important;
+      height: 1.2rem !important;
+      min-width: 1.2rem !important;
+      max-width: 1.2rem !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      flex-shrink: 0 !important;
+      accent-color: var(--brand-navy-dark);
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .symptom-item.checked,
+    .symptom-item:has(input[type="checkbox"]:checked) {
+      background: #EFF6FC;
       border-color: var(--brand-navy-dark);
+      color: var(--brand-navy-dark);
       font-weight: 600;
+      box-shadow: 0 1px 4px rgba(14, 41, 84, 0.08);
     }
 
     .btn-submit {
@@ -2388,9 +2424,10 @@
       const data = latestSubmittedIntake;
 
       // 1. Primary: jsPDF generation
-      if (window.jspdf && window.jspdf.jsPDF) {
+      const jsPdfClass = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : (window.jsPDF || null);
+      if (jsPdfClass) {
         try {
-          const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+          const doc = new jsPdfClass({ orientation: 'portrait', unit: 'mm', format: 'a4' });
           const pageWidth = doc.internal.pageSize.getWidth();
           const margin = 18;
           const contentWidth = pageWidth - margin * 2;
@@ -2401,7 +2438,7 @@
           doc.setFillColor(203, 228, 249);
           doc.rect(0, 0, pageWidth, 15, 'F');
 
-          // Header text: Retain ONLY clinician credential centered cleanly
+          // Header text: Clinician credential centered cleanly
           doc.setFont('helvetica', 'bold');
           doc.setFontSize(8.5);
           doc.setTextColor(14, 41, 84);
@@ -2428,7 +2465,7 @@
             ['Contact Email', data.email],
             ['Mobile Phone', data.phone],
             ['Consultation Type', data.consultationType === 'marriage_couples' ? 'Marriage & Couples (80–90 min)' : 'Individual Psychotherapy (50–55 min)'],
-            ['Life / Work Context', data.currentOccupationOrLifeContext],
+            ['Life / Work Context', data.currentOccupationOrLifeContext || 'Not specified'],
             ['Reported Strain Level', `${data.stressLevel} / 10`],
             ['Emergency Contact', `${data.emergencyName} (${data.emergencyRelationship}) - ${data.emergencyPhone}`],
             ['Location Preference', data.preferredSessionMode === 'virtual_seriousmd' ? 'Virtual Consultation (Video Telehealth)' : data.preferredSessionMode === 'in_person_mapagkalinga' ? 'In-Person (Mapagkalinga Taytay)' : 'In-Person (Aurahealth Metroeast)'],
@@ -2467,7 +2504,7 @@
           doc.text(reasonLines, margin, y);
           y += reasonLines.length * 4.3 + 3.5;
 
-          const sympText = `Symptoms: ${data.symptoms.length ? data.symptoms.join(', ') : 'None specified'}`;
+          const sympText = `Symptoms & Concerns: ${(data.symptoms && data.symptoms.length) ? data.symptoms.join(', ') : 'None specified'}`;
           const sympSplit = doc.splitTextToSize(sympText, contentWidth);
           doc.text(sympSplit, margin, y);
           y += sympSplit.length * 4.3 + 5;
@@ -2491,55 +2528,126 @@
           doc.setFontSize(8);
           doc.setTextColor(51, 65, 85);
           doc.text('1. Vince will personally review your intake responses prior to your scheduled consultation.', margin + boxPaddingX, y + 11);
-          doc.text('2. A link will be sent to your email for the video conferencing prior to your session.', margin + boxPaddingX, y + 16);
+          doc.text(`2. A link will be sent to your email (${data.email}) for video conferencing prior to your session.`, margin + boxPaddingX, y + 16);
           doc.text('3. If you ever need to reschedule, please notify at least 24 hours in advance.', margin + boxPaddingX, y + 21);
 
           doc.save(`intake-receipt-${data.referenceId}.pdf`);
           return;
         } catch (e) {
-          console.warn('Receipt jsPDF failed, falling back to print iframe:', e);
+          console.warn('Receipt jsPDF failed, falling back to complete print iframe:', e);
         }
       }
 
-      // 2. Fallback: Iframe print
+      // 2. Fallback: Iframe print containing 100% complete intake summary details
       const iframe = document.getElementById('printWorksheetIframe');
       if (iframe) {
+        const formattedConsultType = data.consultationType === 'marriage_couples' 
+          ? 'Marriage & Couples Counseling (80–90 min)' 
+          : 'Individual Psychotherapy (50–55 min)';
+        const formattedModality = data.preferredSessionMode === 'virtual_seriousmd'
+          ? 'Virtual Consultation (Video Telehealth via SeriousMD)'
+          : data.preferredSessionMode === 'in_person_mapagkalinga'
+          ? 'In-Person (Mapagkalinga Services, Taytay - Saturdays)'
+          : 'In-Person (Aurahealth Rehab East, Robinsons Metroeast - Fridays)';
+        const formattedAiConsent = data.aiTranscriberConsent === 'agree'
+          ? 'AGREED to Heidi Health AI clinical note-taking'
+          : 'DECLINED (Traditional manual clinical notes only)';
+        const formattedSymptoms = (data.symptoms && data.symptoms.length) 
+          ? data.symptoms.join(', ') 
+          : 'None specified';
+        const formattedStress = `${data.stressLevel} / 10 (${Number(data.stressLevel) >= 8 ? 'High Strain / Overwhelm' : Number(data.stressLevel) >= 5 ? 'Moderate Strain' : 'Mild Strain'})`;
+
         iframe.srcdoc = `
+          <!DOCTYPE html>
           <html>
           <head>
+            <meta charset="utf-8">
+            <title>Intake Summary - ${data.referenceId}</title>
             <style>
-              @page { size: A4; margin: 15mm; }
-              body { font-family: sans-serif; color: #1E293B; line-height: 1.5; }
-              .header-bar { background: #CBE4F9; padding: 10px; text-align: center; font-weight: bold; font-size: 11px; color: #0E2954; }
-              h1 { color: #0E2954; font-size: 18px; margin-top: 15px; }
-              table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-              td { padding: 6px 10px; border: 1px solid #CBD5E1; font-size: 11px; }
-              td.label { background: #F8FAFC; font-weight: bold; width: 35%; color: #334155; }
+              @page { size: A4 portrait; margin: 12mm 15mm; }
+              * { box-sizing: border-box; }
+              body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: #1E293B; margin: 0; padding: 0; line-height: 1.5; font-size: 11px; }
+              .header-bar { background: #CBE4F9; padding: 10px 14px; text-align: center; font-weight: 700; font-size: 10px; color: #0E2954; letter-spacing: 0.04em; border-radius: 4px; }
+              .doc-title { margin-top: 16px; margin-bottom: 4px; color: #0E2954; font-size: 17px; font-weight: 700; }
+              .doc-meta { font-size: 10.5px; color: #64748B; margin-bottom: 14px; }
+              table { width: 100%; border-collapse: collapse; margin-bottom: 14px; border: 1px solid #CBD5E1; }
+              td { padding: 6px 10px; border: 1px solid #CBD5E1; font-size: 10.5px; vertical-align: top; }
+              td.label { background: #F8FAFC; font-weight: 600; width: 34%; color: #334155; }
+              td.value { color: #0F172A; }
+              .section-heading { font-size: 11px; font-weight: 700; color: #0E2954; margin: 12px 0 6px; }
+              .content-box { background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 4px; padding: 8px 12px; font-size: 10px; color: #334155; line-height: 1.5; margin-bottom: 12px; }
+              .next-steps-card { background: #EFF6FC; border: 1px solid #BAE0FD; border-left: 4px solid #0E2954; border-radius: 4px; padding: 10px 12px; margin-top: 12px; }
+              .next-steps-title { font-weight: 700; color: #0E2954; font-size: 11px; margin-bottom: 6px; }
+              .next-steps-list { margin: 0; padding-left: 18px; font-size: 10px; color: #334155; }
+              .next-steps-list li { margin-bottom: 4px; }
+              .footer-disclaimer { margin-top: 14px; text-align: center; font-size: 9px; color: #94A3B8; border-top: 1px solid #E2E8F0; padding-top: 8px; }
             </style>
           </head>
           <body>
             <div class="header-bar">VINCENT BREN TAJOR, RPsy · REGISTERED PSYCHOLOGIST · PRC #0002156</div>
-            <h1>Client Confidential Intake Summary</h1>
-            <p style="font-size: 11px; color: #64748B;">Reference ID: ${data.referenceId} | Date: ${data.submissionDate}</p>
+            <div class="doc-title">Client Confidential Intake Summary</div>
+            <div class="doc-meta">Reference ID: <strong>${data.referenceId}</strong> &nbsp;|&nbsp; Date: ${data.submissionDate}</div>
+            
             <table>
-              <tr><td class="label">Full Legal Name</td><td>${data.fullName}</td></tr>
-              <tr><td class="label">Age & Pronouns</td><td>${data.age} (${data.pronouns})</td></tr>
-              <tr><td class="label">Contact Email</td><td>${data.email}</td></tr>
-              <tr><td class="label">Contact Phone</td><td>${data.phone}</td></tr>
-              <tr><td class="label">Consultation Type</td><td>${data.consultationType}</td></tr>
-              <tr><td class="label">Strain Index</td><td>${data.stressLevel} / 10</td></tr>
-              <tr><td class="label">Emergency Contact</td><td>${data.emergencyName} (${data.emergencyRelationship}) - ${data.emergencyPhone}</td></tr>
-              <tr><td class="label">Primary Reason</td><td>${data.primaryReason}</td></tr>
+              <tr><td class="label">Full Legal Name</td><td class="value"><strong>${data.fullName}</strong></td></tr>
+              <tr><td class="label">Preferred Name / Nickname</td><td class="value">${data.preferredName || 'None specified'}</td></tr>
+              <tr><td class="label">Age & Pronouns</td><td class="value">${data.age} years old (${data.pronouns || 'Not specified'})</td></tr>
+              <tr><td class="label">Gender Identity</td><td class="value">${data.genderIdentity || 'Not specified'}</td></tr>
+              <tr><td class="label">Safe Contact Email</td><td class="value">${data.email}</td></tr>
+              <tr><td class="label">Contact Mobile Phone</td><td class="value">${data.phone}</td></tr>
+              <tr><td class="label">Consultation Service</td><td class="value">${formattedConsultType}</td></tr>
+              <tr><td class="label">Occupation / Life Context</td><td class="value">${data.currentOccupationOrLifeContext || 'Not specified'}</td></tr>
+              <tr><td class="label">Baseline Emotional Strain Index</td><td class="value">${formattedStress}</td></tr>
+              <tr><td class="label">Emergency Contact</td><td class="value">${data.emergencyName} (${data.emergencyRelationship}) - ${data.emergencyPhone}</td></tr>
+              <tr><td class="label">Session Modality Preference</td><td class="value">${formattedModality}</td></tr>
+              <tr><td class="label">AI Clinical Scribe (Heidi Health)</td><td class="value">${formattedAiConsent}</td></tr>
+              <tr><td class="label">Previous Therapy Experience</td><td class="value">${data.previousTherapy === 'no_first_time' ? 'First time attending therapy' : data.previousTherapy === 'yes_helpful' ? 'Attended before (helpful experience)' : data.previousTherapy === 'yes_mixed' ? 'Attended before (mixed experience)' : (data.previousTherapy || 'Not specified')}</td></tr>
             </table>
+
+            <div class="section-heading">Current Symptoms & Areas of Concern:</div>
+            <div class="content-box">${formattedSymptoms}</div>
+
+            <div class="section-heading">Primary Reason for Seeking Therapy:</div>
+            <div class="content-box">${data.primaryReason ? String(data.primaryReason).replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>') : 'None provided'}</div>
+
+            <div class="next-steps-card">
+              <div class="next-steps-title">Next Steps with Vince Tajor, RPsy:</div>
+              <ol class="next-steps-list">
+                <li>Vince will personally review your intake responses prior to your scheduled consultation.</li>
+                <li>A secure link will be sent to your email (<strong>${data.email}</strong>) and mobile phone for video conferencing prior to your session.</li>
+                <li>If you ever need to reschedule, please notify at least 24 hours in advance.</li>
+              </ol>
+            </div>
+
+            <div class="footer-disclaimer">
+              This intake summary is strictly confidential under the Philippine Data Privacy Act of 2012 (RA 10173) and the Code of Ethics of the Psychological Association of the Philippines (PAP).
+            </div>
           </body>
           </html>
         `;
         iframe.onload = () => {
-          iframe.contentWindow.focus();
-          iframe.contentWindow.print();
+          try {
+            iframe.contentWindow.focus();
+            iframe.contentWindow.print();
+          } catch (e) {
+            console.error('Print iframe error:', e);
+          }
         };
       }
     }
+
+    // Attach symptom item checked state handlers on document load
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.symptom-item input[type="checkbox"]').forEach(input => {
+        input.addEventListener('change', () => {
+          const parent = input.closest('.symptom-item');
+          if (parent) {
+            if (input.checked) parent.classList.add('checked');
+            else parent.classList.remove('checked');
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>
